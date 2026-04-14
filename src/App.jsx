@@ -14,6 +14,8 @@ const STILLS_TB = [
   "/stills/tb-01.jpg", "/stills/tb-02.jpg", "/stills/tb-03.jpg",
 ];
 
+const ALL_IMAGES = [...STILLS_LB, ...STILLS_TC, ...STILLS_TB];
+
 const FONTS_CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Libre+Franklin:wght@300;400;500&display=swap');
 :root {
@@ -48,7 +50,7 @@ const FILMS = [
     category: "Short Film",
     year: "2026",
     role: "Director of Photography · DI Colorist",
-    director: "Park Jinyoung",
+    director: "Park Jinyeong",
     format: "Digital — Sony Burano",
     duration: "In Post-Production",
     description:
@@ -148,7 +150,26 @@ function FadeIn({ children, delay = 0, style = {} }) {
 
 function HeroSection() {
   const [loaded, setLoaded] = useState(false);
+  const [currentImg, setCurrentImg] = useState(HERO_IMAGE);
+  const [nextImg, setNextImg] = useState(null);
+  const [fading, setFading] = useState(false);
+
   useEffect(() => { setTimeout(() => setLoaded(true), 100); }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const pool = ALL_IMAGES.filter(img => img !== currentImg);
+      const next = pool[Math.floor(Math.random() * pool.length)];
+      setNextImg(next);
+      setFading(true);
+      setTimeout(() => {
+        setCurrentImg(next);
+        setFading(false);
+        setNextImg(null);
+      }, 1200);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [currentImg]);
 
   return (
     <section id="hero" style={{
@@ -156,11 +177,16 @@ function HeroSection() {
       padding: "0 clamp(24px, 5vw, 80px) clamp(48px, 8vh, 100px)", position: "relative", overflow: "hidden",
     }}>
       <div style={{
-        position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMAGE})`,
+        position: "absolute", inset: 0, backgroundImage: `url(${currentImg})`,
         backgroundSize: "cover", backgroundPosition: "center 30%", zIndex: 0,
         opacity: loaded ? 1 : 0, transform: loaded ? "scale(1)" : "scale(1.05)",
         transition: "opacity 1.8s ease 0.2s, transform 3s ease 0s",
       }} />
+      {nextImg && <div style={{
+        position: "absolute", inset: 0, backgroundImage: `url(${nextImg})`,
+        backgroundSize: "cover", backgroundPosition: "center 30%", zIndex: 0,
+        opacity: fading ? 1 : 0, transition: "opacity 1.2s ease",
+      }} />}
       <div style={{
         position: "absolute", inset: 0, zIndex: 1,
         background: `linear-gradient(180deg, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.1) 30%, rgba(10,10,10,0.85) 75%, rgba(10,10,10,0.98) 100%),
@@ -356,19 +382,19 @@ function AboutSection() {
         </FadeIn>
         <FadeIn delay={0.25}>
           <div style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.9, color: "var(--text-secondary)" }}>
-            <p>I am a cinematography student at Dongguk University, Seoul, pursuing a career as a director of photography. My work is guided by the belief that the camera is not merely a recording device but a storytelling instrument — one that shapes how an audience feels before they understand why.</p>
+            <p>I studied film at Dongguk University, Seoul, specializing in cinematography and lighting within the Department of Film. My work has always been rooted in the belief that light is not decoration — it is language.</p>
             <br />
-            <p>I study the interplay between naturalistic and expressive lighting, drawing from the traditions of classical cinematographers while searching for a visual language that is my own. Each project is an opportunity to understand light more deeply.</p>
+            <p>Beyond traditional filmmaking, I continue to explore the intersection of cinematography and AI-driven visual media — investigating how emerging tools can expand the boundaries of visual storytelling while preserving the craft at its core.</p>
             <br />
-            <p style={{ color: "var(--text-muted)", fontSize: 12 }}>Influences — Roger Deakins, Vittorio Storaro, Janusz Kamiński, Robert Richardson. I believe in the power of simplicity, the discipline of pre-visualization, and the courage to let a single frame breathe.</p>
+            <p style={{ color: "var(--text-muted)", fontSize: 12 }}>Every project is an opportunity to push further — whether through a carefully shaped shadow on set or an algorithmically generated frame that still carries emotional truth.</p>
           </div>
         </FadeIn>
       </div>
       <FadeIn delay={0.35}>
         <div style={{ marginTop: 64, paddingTop: 32, borderTop: "1px solid var(--border)", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 32 }}>
           {[
-            { label: "Education", value: "Dongguk University\nFilm & Visual Media" },
-            { label: "Focus", value: "Cinematography\nLighting Design" },
+            { label: "Education", value: "Dongguk University\nDepartment of Film" },
+            { label: "Focus", value: "Cinematography · Lighting\nAI Visual Media" },
             { label: "Tools", value: "DaVinci Resolve\nPremiere Pro" },
             { label: "Based in", value: "Seoul,\nSouth Korea" },
           ].map((item, i) => (
