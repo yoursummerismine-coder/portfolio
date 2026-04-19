@@ -238,6 +238,7 @@ function HeroSection() {
 
 function StillsGallery({ stills }) {
   const [lightbox, setLightbox] = useState(null);
+  const touchStartX = useRef(null);
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -249,6 +250,16 @@ function StillsGallery({ stills }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [lightbox, stills.length]);
+
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 40) return;
+    if (delta < 0) setLightbox(i => (i + 1) % stills.length);
+    else setLightbox(i => (i - 1 + stills.length) % stills.length);
+  };
 
   if (!stills || stills.length === 0) {
     return (
@@ -296,12 +307,17 @@ function StillsGallery({ stills }) {
       )}
 
       {lightbox !== null && (
-        <div onClick={() => setLightbox(null)} style={{
-          position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.92)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          backdropFilter: "blur(8px)",
-        }}>
-          <img src={stills[lightbox]} alt="" style={{ maxWidth: "80vw", maxHeight: "85vh", objectFit: "contain" }} />
+        <div
+          onClick={() => setLightbox(null)}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          style={{
+            position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.92)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          <img src={stills[lightbox]} alt="" style={{ maxWidth: "80vw", maxHeight: "85vh", objectFit: "contain", pointerEvents: "none" }} />
 
           {stills.length > 1 && (
             <button onClick={e => { e.stopPropagation(); setLightbox(i => (i - 1 + stills.length) % stills.length); }} style={{
