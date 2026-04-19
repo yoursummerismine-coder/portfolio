@@ -239,6 +239,17 @@ function HeroSection() {
 function StillsGallery({ stills }) {
   const [lightbox, setLightbox] = useState(null);
 
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e) => {
+      if (e.key === "ArrowRight") setLightbox(i => (i + 1) % stills.length);
+      else if (e.key === "ArrowLeft") setLightbox(i => (i - 1 + stills.length) % stills.length);
+      else if (e.key === "Escape") setLightbox(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox, stills.length]);
+
   if (!stills || stills.length === 0) {
     return (
       <div style={{
@@ -287,10 +298,41 @@ function StillsGallery({ stills }) {
       {lightbox !== null && (
         <div onClick={() => setLightbox(null)} style={{
           position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.92)",
-          display: "flex", alignItems: "center", justifyContent: "center", cursor: "zoom-out",
+          display: "flex", alignItems: "center", justifyContent: "center",
           backdropFilter: "blur(8px)",
         }}>
-          <img src={stills[lightbox]} alt="" style={{ maxWidth: "90vw", maxHeight: "85vh", objectFit: "contain" }} />
+          <img src={stills[lightbox]} alt="" style={{ maxWidth: "80vw", maxHeight: "85vh", objectFit: "contain" }} />
+
+          {stills.length > 1 && (
+            <button onClick={e => { e.stopPropagation(); setLightbox(i => (i - 1 + stills.length) % stills.length); }} style={{
+              position: "absolute", left: 24, top: "50%", transform: "translateY(-50%)",
+              background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
+              borderRadius: "50%", width: 44, height: 44, cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              color: "var(--text-primary)", transition: "background 0.2s",
+            }}
+              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}
+              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.07)"}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+          )}
+
+          {stills.length > 1 && (
+            <button onClick={e => { e.stopPropagation(); setLightbox(i => (i + 1) % stills.length); }} style={{
+              position: "absolute", right: 24, top: "50%", transform: "translateY(-50%)",
+              background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
+              borderRadius: "50%", width: 44, height: 44, cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              color: "var(--text-primary)", transition: "background 0.2s",
+            }}
+              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}
+              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.07)"}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          )}
+
           <div style={{ position: "absolute", bottom: 24, display: "flex", gap: 16 }}>
             {stills.map((_, i) => (
               <button key={i} onClick={e => { e.stopPropagation(); setLightbox(i); }} style={{
