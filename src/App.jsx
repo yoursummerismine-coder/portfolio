@@ -487,7 +487,7 @@ function ContactSection() {
             display: "inline-block", width: "fit-content",
           }}>yoursummerismine@gmail.com</a>
           <div style={{ display: "flex", gap: 24, marginTop: 8 }}>
-            {[{ label: "Instagram", url: "https://instagram.com/headingtostar" }].map((link) => (
+            {[{ label: "Instagram — headingtostar", url: "https://instagram.com/headingtostar" }].map((link) => (
               <a key={link.label} href={link.url} style={{
                 fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.1em",
                 textTransform: "uppercase", color: "var(--text-muted)", textDecoration: "none",
