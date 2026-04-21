@@ -40,7 +40,7 @@ body { font-family: var(--font-body); background: var(--bg-primary); color: var(
 ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
 `;
 
-const NAV_ITEMS = ["Works", "About", "Contact"];
+const NAV_ITEMS = ["Films", "AI Work", "About", "Contact"];
 
 const FILMS = [
   {
@@ -92,6 +92,26 @@ const FILMS = [
     watchLabel: null,
   },
 ];
+
+const AI_WORKS = [
+  {
+    id: 1,
+    src: "/ai/ai-01.mp4",
+    poster: "/ai/posters/ai-01.jpg",
+    description: "Photorealistic portrait — exploring how generative tools can capture the warmth of a candid expression while maintaining the precision of staged cinematography.",
+    tools: "Nano Banana · Kling",
+    year: "2026",
+  },
+  {
+    id: 2,
+    src: "/ai/ai-02.mp4",
+    poster: "/ai/posters/ai-02.jpg",
+    description: "An exercise in surreal mise-en-scène. Suspended blossoms frame a single figure, blending photographic realism with a painterly, dreamlike composition.",
+    tools: "Nano Banana · Kling",
+    year: "2026",
+  },
+];
+
 
 function Nav({ activeSection, onNavigate }) {
   const [scrolled, setScrolled] = useState(false);
@@ -238,28 +258,6 @@ function HeroSection() {
 
 function StillsGallery({ stills }) {
   const [lightbox, setLightbox] = useState(null);
-  const touchStartX = useRef(null);
-
-  useEffect(() => {
-    if (lightbox === null) return;
-    const onKey = (e) => {
-      if (e.key === "ArrowRight") setLightbox(i => (i + 1) % stills.length);
-      else if (e.key === "ArrowLeft") setLightbox(i => (i - 1 + stills.length) % stills.length);
-      else if (e.key === "Escape") setLightbox(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [lightbox, stills.length]);
-
-  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
-  const onTouchEnd = (e) => {
-    if (touchStartX.current === null) return;
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    touchStartX.current = null;
-    if (Math.abs(delta) < 40) return;
-    if (delta < 0) setLightbox(i => (i + 1) % stills.length);
-    else setLightbox(i => (i - 1 + stills.length) % stills.length);
-  };
 
   if (!stills || stills.length === 0) {
     return (
@@ -307,48 +305,42 @@ function StillsGallery({ stills }) {
       )}
 
       {lightbox !== null && (
-        <div
-          onClick={() => setLightbox(null)}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-          style={{
-            position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.92)",
+        <div onClick={() => setLightbox(null)} style={{
+          position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.92)",
+          display: "flex", alignItems: "center", justifyContent: "center", cursor: "zoom-out",
+          backdropFilter: "blur(8px)",
+        }}>
+          <img src={stills[lightbox]} alt="" style={{ maxWidth: "75vw", maxHeight: "85vh", objectFit: "contain" }} />
+
+          {/* Left arrow */}
+          <button onClick={e => { e.stopPropagation(); setLightbox(lightbox <= 0 ? stills.length - 1 : lightbox - 1); }} style={{
+            position: "absolute", left: "clamp(12px, 3vw, 40px)", top: "50%", transform: "translateY(-50%)",
+            background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)",
+            borderRadius: "50%", width: 48, height: 48, cursor: "pointer",
             display: "flex", alignItems: "center", justifyContent: "center",
-            backdropFilter: "blur(8px)",
+            transition: "background 0.3s, border-color 0.3s",
           }}
-        >
-          <img src={stills[lightbox]} alt="" style={{ maxWidth: "80vw", maxHeight: "85vh", objectFit: "contain", pointerEvents: "none" }} />
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" strokeWidth="1.5"><path d="M15 19l-7-7 7-7" /></svg>
+          </button>
 
-          {stills.length > 1 && (
-            <button onClick={e => { e.stopPropagation(); setLightbox(i => (i - 1 + stills.length) % stills.length); }} style={{
-              position: "absolute", left: 24, top: "50%", transform: "translateY(-50%)",
-              background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
-              borderRadius: "50%", width: 44, height: 44, cursor: "pointer",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: "var(--text-primary)", transition: "background 0.2s",
-            }}
-              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}
-              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.07)"}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-          )}
+          {/* Right arrow */}
+          <button onClick={e => { e.stopPropagation(); setLightbox(lightbox >= stills.length - 1 ? 0 : lightbox + 1); }} style={{
+            position: "absolute", right: "clamp(12px, 3vw, 40px)", top: "50%", transform: "translateY(-50%)",
+            background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)",
+            borderRadius: "50%", width: 48, height: 48, cursor: "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            transition: "background 0.3s, border-color 0.3s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" strokeWidth="1.5"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
 
-          {stills.length > 1 && (
-            <button onClick={e => { e.stopPropagation(); setLightbox(i => (i + 1) % stills.length); }} style={{
-              position: "absolute", right: 24, top: "50%", transform: "translateY(-50%)",
-              background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
-              borderRadius: "50%", width: 44, height: 44, cursor: "pointer",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: "var(--text-primary)", transition: "background 0.2s",
-            }}
-              onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}
-              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.07)"}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          )}
-
+          {/* Dot navigation */}
           <div style={{ position: "absolute", bottom: 24, display: "flex", gap: 16 }}>
             {stills.map((_, i) => (
               <button key={i} onClick={e => { e.stopPropagation(); setLightbox(i); }} style={{
@@ -357,6 +349,8 @@ function StillsGallery({ stills }) {
               }} />
             ))}
           </div>
+
+          {/* Close button */}
           <button onClick={() => setLightbox(null)} style={{
             position: "absolute", top: 24, right: 24, background: "none", border: "none",
             color: "var(--text-secondary)", fontSize: 24, cursor: "pointer", fontFamily: "var(--font-body)",
@@ -487,13 +481,189 @@ function ContactSection() {
             display: "inline-block", width: "fit-content",
           }}>yoursummerismine@gmail.com</a>
           <div style={{ display: "flex", gap: 24, marginTop: 8 }}>
-            {[{ label: "Instagram — headingtostar", url: "https://instagram.com/headingtostar" }].map((link) => (
+            {[{ label: "Instagram", url: "https://instagram.com/headingtostar" }].map((link) => (
               <a key={link.label} href={link.url} style={{
                 fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.1em",
                 textTransform: "uppercase", color: "var(--text-muted)", textDecoration: "none",
               }}>{link.label}</a>
             ))}
           </div>
+        </div>
+      </FadeIn>
+    </section>
+  );
+}
+
+
+function AIWorkCard({ work }) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const videoRef = useRef(null);
+
+  return (
+    <>
+      <div
+        onClick={() => setLightboxOpen(true)}
+        style={{
+          aspectRatio: "16/9",
+          background: "#0a0a0a",
+          position: "relative",
+          overflow: "hidden",
+          cursor: "pointer",
+          transition: "transform 0.4s ease",
+        }}
+        onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.005)"; }}
+        onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
+      >
+        <video
+          ref={videoRef}
+          src={work.src}
+          poster={work.poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.85) 100%)",
+          pointerEvents: "none",
+        }} />
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0,
+          padding: "16px 20px",
+          pointerEvents: "none",
+        }}>
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: 10,
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "var(--accent)",
+            marginBottom: 4,
+          }}>
+            {work.tools}
+          </p>
+        </div>
+      </div>
+
+      {lightboxOpen && (
+        <div
+          onClick={() => setLightboxOpen(false)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 1000,
+            background: "rgba(0,0,0,0.95)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "zoom-out", backdropFilter: "blur(8px)",
+          }}
+        >
+          <video
+            src={work.src}
+            poster={work.poster}
+            autoPlay loop muted playsInline
+            style={{ maxWidth: "85vw", maxHeight: "85vh", objectFit: "contain" }}
+            onClick={e => e.stopPropagation()}
+          />
+          <button onClick={() => setLightboxOpen(false)} style={{
+            position: "absolute", top: 24, right: 24, background: "none", border: "none",
+            color: "var(--text-secondary)", fontSize: 24, cursor: "pointer", fontFamily: "var(--font-body)",
+          }}>✕</button>
+        </div>
+      )}
+    </>
+  );
+}
+
+function AIWorkSection() {
+  return (
+    <section
+      id="ai-work"
+      style={{
+        padding: "clamp(80px, 12vh, 160px) clamp(24px, 5vw, 80px) 0",
+        borderTop: "1px solid var(--border)",
+      }}
+    >
+      <FadeIn>
+        <p style={{
+          fontFamily: "var(--font-body)",
+          fontSize: 11,
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+          color: "var(--text-muted)",
+          marginBottom: 16,
+        }}>
+          Chapter II
+        </p>
+        <h2 style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(36px, 5vw, 64px)",
+          fontWeight: 300,
+          fontStyle: "italic",
+          color: "var(--text-primary)",
+          marginBottom: 12,
+          lineHeight: 1.1,
+        }}>
+          AI Work
+        </h2>
+        <p style={{
+          fontFamily: "var(--font-body)",
+          fontSize: 13,
+          fontWeight: 300,
+          lineHeight: 1.85,
+          color: "var(--text-secondary)",
+          maxWidth: 580,
+          marginBottom: 64,
+        }}>
+          Visual experiments at the intersection of cinematography and generative tools — a continuing study in how machine-made imagery can carry emotional and compositional intent.
+        </p>
+      </FadeIn>
+
+      <FadeIn delay={0.15}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gap: 4,
+          marginBottom: 56,
+        }}>
+          {AI_WORKS.map(work => (
+            <AIWorkCard key={work.id} work={work} />
+          ))}
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={0.25}>
+        <div style={{
+          paddingTop: 24,
+          borderTop: "1px solid var(--border)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 12,
+          marginBottom: 16,
+        }}>
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: 11,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: "var(--accent-dim)",
+          }}>
+            AI Artist
+          </p>
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: 11,
+            color: "var(--text-muted)",
+            fontStyle: "italic",
+          }}>
+            More works in progress.
+          </p>
         </div>
       </FadeIn>
     </section>
@@ -507,7 +677,7 @@ export default function Portfolio() {
     document.head.appendChild(s); return () => document.head.removeChild(s);
   }, []);
   useEffect(() => {
-    const sections = ["works", "about", "contact"];
+    const sections = ["films", "ai-work", "about", "contact"];
     const handleScroll = () => {
       for (const id of sections) {
         const el = document.getElementById(id);
@@ -518,18 +688,23 @@ export default function Portfolio() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const scrollTo = (id) => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: "smooth" }); };
+  const scrollTo = (id) => {
+    const targetId = id.replace(/\s+/g, "-");
+    const el = document.getElementById(targetId);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg-primary)", color: "var(--text-primary)" }}>
       <Nav activeSection={activeSection} onNavigate={scrollTo} />
       <HeroSection />
-      <section id="works" style={{ padding: "clamp(80px, 12vh, 160px) clamp(24px, 5vw, 80px) 0" }}>
+      <section id="films" style={{ padding: "clamp(80px, 12vh, 160px) clamp(24px, 5vw, 80px) 0" }}>
         <FadeIn>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 56 }}>Selected Works</p>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 56 }}>Selected Films</p>
         </FadeIn>
         {FILMS.map((film, i) => (<FilmCard key={film.id} film={film} index={i} />))}
       </section>
+      <AIWorkSection />
       <AboutSection />
       <ContactSection />
       <footer style={{ padding: "32px clamp(24px, 5vw, 80px)", borderTop: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
