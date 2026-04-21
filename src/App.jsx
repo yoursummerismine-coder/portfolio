@@ -110,7 +110,16 @@ const AI_WORKS = [
     tools: "Nano Banana · Kling",
     year: "2026",
   },
+  {
+    id: 3,
+    type: "image",
+    src: "/ai/ai-03.jpg",
+    description: "A quiet portrait in natural window light — exploring how AI-generated imagery can hold the stillness and texture of a photographic moment.",
+    tools: "Nano Banana",
+    year: "2026",
+  },
 ];
+
 
 
 function Nav({ activeSection, onNavigate }) {
@@ -258,6 +267,17 @@ function HeroSection() {
 
 function StillsGallery({ stills }) {
   const [lightbox, setLightbox] = useState(null);
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const handler = (e) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowLeft") setLightbox(i => (i <= 0 ? stills.length - 1 : i - 1));
+      if (e.key === "ArrowRight") setLightbox(i => (i >= stills.length - 1 ? 0 : i + 1));
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [lightbox, stills.length]);
 
   if (!stills || stills.length === 0) {
     return (
@@ -495,33 +515,25 @@ function ContactSection() {
 }
 
 
-function AIWorkCard({ work }) {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const videoRef = useRef(null);
-
+function AIWorkCard({ work, onOpen }) {
   return (
-    <>
-      <div
-        onClick={() => setLightboxOpen(true)}
-        style={{
-          aspectRatio: "16/9",
-          background: "#0a0a0a",
-          position: "relative",
-          overflow: "hidden",
-          cursor: "pointer",
-          transition: "transform 0.4s ease",
-        }}
-        onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.005)"; }}
-        onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
-      >
-        <video
-          ref={videoRef}
+    <div
+      onClick={onOpen}
+      style={{
+        aspectRatio: "16/9",
+        background: "#0a0a0a",
+        position: "relative",
+        overflow: "hidden",
+        cursor: "pointer",
+        transition: "transform 0.4s ease",
+      }}
+      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.005)"; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}
+    >
+      {work.type === "image" ? (
+        <img
           src={work.src}
-          poster={work.poster}
-          autoPlay
-          muted
-          loop
-          playsInline
+          alt=""
           style={{
             width: "100%",
             height: "100%",
@@ -529,57 +541,142 @@ function AIWorkCard({ work }) {
             display: "block",
           }}
         />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.85) 100%)",
-          pointerEvents: "none",
-        }} />
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, right: 0,
-          padding: "16px 20px",
-          pointerEvents: "none",
+      ) : (
+      <video
+        src={work.src}
+        poster={work.poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block",
+        }}
+      />
+      )}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.85) 100%)",
+        pointerEvents: "none",
+      }} />
+      <div style={{
+        position: "absolute", bottom: 0, left: 0, right: 0,
+        padding: "16px 20px",
+        pointerEvents: "none",
+      }}>
+        <p style={{
+          fontFamily: "var(--font-body)",
+          fontSize: 10,
+          letterSpacing: "0.15em",
+          textTransform: "uppercase",
+          color: "var(--accent)",
+          marginBottom: 4,
         }}>
-          <p style={{
-            fontFamily: "var(--font-body)",
-            fontSize: 10,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "var(--accent)",
-            marginBottom: 4,
-          }}>
-            {work.tools}
-          </p>
-        </div>
+          {work.tools}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AIWorkLightbox({ index, onClose, onPrev, onNext }) {
+  const work = AI_WORKS[index];
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") onPrev();
+      if (e.key === "ArrowRight") onNext();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose, onPrev, onNext]);
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 1000,
+        background: "rgba(0,0,0,0.95)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        cursor: "zoom-out", backdropFilter: "blur(8px)",
+      }}
+    >
+      {work.type === "image" ? (
+        <img
+          key={work.id}
+          src={work.src}
+          alt=""
+          style={{ maxWidth: "75vw", maxHeight: "85vh", objectFit: "contain" }}
+          onClick={e => e.stopPropagation()}
+        />
+      ) : (
+      <video
+        key={work.id}
+        src={work.src}
+        poster={work.poster}
+        autoPlay loop muted playsInline
+        style={{ maxWidth: "75vw", maxHeight: "85vh", objectFit: "contain" }}
+        onClick={e => e.stopPropagation()}
+      />
+      )}
+
+      {/* Left arrow */}
+      <button onClick={e => { e.stopPropagation(); onPrev(); }} style={{
+        position: "absolute", left: "clamp(12px, 3vw, 40px)", top: "50%", transform: "translateY(-50%)",
+        background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)",
+        borderRadius: "50%", width: 48, height: 48, cursor: "pointer",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        transition: "background 0.3s, border-color 0.3s",
+      }}
+        onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)"; }}
+        onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" strokeWidth="1.5"><path d="M15 19l-7-7 7-7" /></svg>
+      </button>
+
+      {/* Right arrow */}
+      <button onClick={e => { e.stopPropagation(); onNext(); }} style={{
+        position: "absolute", right: "clamp(12px, 3vw, 40px)", top: "50%", transform: "translateY(-50%)",
+        background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)",
+        borderRadius: "50%", width: 48, height: 48, cursor: "pointer",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        transition: "background 0.3s, border-color 0.3s",
+      }}
+        onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)"; }}
+        onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" strokeWidth="1.5"><path d="M9 5l7 7-7 7" /></svg>
+      </button>
+
+      {/* Dot navigation */}
+      <div style={{ position: "absolute", bottom: 24, display: "flex", gap: 16 }}>
+        {AI_WORKS.map((_, i) => (
+          <button key={i} onClick={e => { e.stopPropagation(); /* navigate */ }} style={{
+            width: 8, height: 8, borderRadius: "50%", border: "none", cursor: "default",
+            background: i === index ? "var(--accent)" : "var(--text-muted)", transition: "background 0.3s",
+          }} />
+        ))}
       </div>
 
-      {lightboxOpen && (
-        <div
-          onClick={() => setLightboxOpen(false)}
-          style={{
-            position: "fixed", inset: 0, zIndex: 1000,
-            background: "rgba(0,0,0,0.95)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            cursor: "zoom-out", backdropFilter: "blur(8px)",
-          }}
-        >
-          <video
-            src={work.src}
-            poster={work.poster}
-            autoPlay loop muted playsInline
-            style={{ maxWidth: "85vw", maxHeight: "85vh", objectFit: "contain" }}
-            onClick={e => e.stopPropagation()}
-          />
-          <button onClick={() => setLightboxOpen(false)} style={{
-            position: "absolute", top: 24, right: 24, background: "none", border: "none",
-            color: "var(--text-secondary)", fontSize: 24, cursor: "pointer", fontFamily: "var(--font-body)",
-          }}>✕</button>
-        </div>
-      )}
-    </>
+      {/* Close button */}
+      <button onClick={e => { e.stopPropagation(); onClose(); }} style={{
+        position: "absolute", top: 24, right: 24, background: "none", border: "none",
+        color: "var(--text-secondary)", fontSize: 24, cursor: "pointer", fontFamily: "var(--font-body)",
+      }}>✕</button>
+    </div>
   );
 }
 
 function AIWorkSection() {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const closeLightbox = () => setLightboxIndex(null);
+  const prevLightbox = () => setLightboxIndex(i => (i <= 0 ? AI_WORKS.length - 1 : i - 1));
+  const nextLightbox = () => setLightboxIndex(i => (i >= AI_WORKS.length - 1 ? 0 : i + 1));
+
   return (
     <section
       id="ai-work"
@@ -630,8 +727,8 @@ function AIWorkSection() {
           gap: 4,
           marginBottom: 56,
         }}>
-          {AI_WORKS.map(work => (
-            <AIWorkCard key={work.id} work={work} />
+          {AI_WORKS.map((work, i) => (
+            <AIWorkCard key={work.id} work={work} onOpen={() => setLightboxIndex(i)} />
           ))}
         </div>
       </FadeIn>
@@ -666,6 +763,15 @@ function AIWorkSection() {
           </p>
         </div>
       </FadeIn>
+
+      {lightboxIndex !== null && (
+        <AIWorkLightbox
+          index={lightboxIndex}
+          onClose={closeLightbox}
+          onPrev={prevLightbox}
+          onNext={nextLightbox}
+        />
+      )}
     </section>
   );
 }
