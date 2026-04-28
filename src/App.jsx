@@ -132,6 +132,13 @@ const AI_WORKS = [
     tools: "Runway Gen-4.5",
     year: "2026",
   },
+  {
+    id: 6,
+    src: "/ai/ai-06.mp4",
+    description: "A generative video study composed through AI-driven motion and cinematic atmosphere.",
+    tools: "RUNWAY ALEPH",
+    year: "2026",
+  },
 ];
 
 
