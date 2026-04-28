@@ -136,7 +136,7 @@ const AI_WORKS = [
     id: 6,
     src: "/ai/ai-06.mp4",
     description: "A generative video study composed through AI-driven motion and cinematic atmosphere.",
-    tools: "RUNWAY ALEPH",
+    tools: "SEEDANCE 2.0",
     year: "2026",
   },
 ];
