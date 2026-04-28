@@ -118,6 +118,13 @@ const AI_WORKS = [
     tools: "Nano Banana",
     year: "2026",
   },
+  {
+    id: 4,
+    src: "/ai/ai-04.mp4",
+    description: "An AI-generated moving image study — exploring texture, motion, and atmosphere through a cinematic frame.",
+    tools: "Runway Aleph",
+    year: "2026",
+  },
 ];
 
 
