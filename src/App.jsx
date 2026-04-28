@@ -139,6 +139,13 @@ const AI_WORKS = [
     tools: "SEEDANCE 2.0",
     year: "2026",
   },
+  {
+    id: 7,
+    src: "/ai/ai-07.mp4",
+    description: "A generative video study focused on cinematic movement and atmospheric texture.",
+    tools: "KLING",
+    year: "2026",
+  },
 ];
 
 
