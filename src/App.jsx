@@ -143,7 +143,7 @@ const AI_WORKS = [
     id: 7,
     src: "/ai/ai-07.mp4",
     description: "A generative video study focused on cinematic movement and atmospheric texture.",
-    tools: "KLING",
+    tools: "NANO BANANA • RUNWAY GEN-4.5",
     year: "2026",
   },
 ];
