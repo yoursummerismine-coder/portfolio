@@ -148,6 +148,8 @@ const AI_WORKS = [
   },
 ];
 
+const AI_WORKS_NEWEST_FIRST = [...AI_WORKS].sort((a, b) => b.id - a.id);
+
 
 
 function Nav({ activeSection, onNavigate }) {
@@ -611,7 +613,7 @@ function AIWorkCard({ work, onOpen }) {
 }
 
 function AIWorkLightbox({ index, onClose, onPrev, onNext }) {
-  const work = AI_WORKS[index];
+  const work = AI_WORKS_NEWEST_FIRST[index];
 
   useEffect(() => {
     const handler = (e) => {
@@ -682,7 +684,7 @@ function AIWorkLightbox({ index, onClose, onPrev, onNext }) {
 
       {/* Dot navigation */}
       <div style={{ position: "absolute", bottom: 24, display: "flex", gap: 16 }}>
-        {AI_WORKS.map((_, i) => (
+        {AI_WORKS_NEWEST_FIRST.map((_, i) => (
           <button key={i} onClick={e => { e.stopPropagation(); /* navigate */ }} style={{
             width: 8, height: 8, borderRadius: "50%", border: "none", cursor: "default",
             background: i === index ? "var(--accent)" : "var(--text-muted)", transition: "background 0.3s",
@@ -702,8 +704,8 @@ function AIWorkLightbox({ index, onClose, onPrev, onNext }) {
 function AIWorkSection() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const closeLightbox = () => setLightboxIndex(null);
-  const prevLightbox = () => setLightboxIndex(i => (i <= 0 ? AI_WORKS.length - 1 : i - 1));
-  const nextLightbox = () => setLightboxIndex(i => (i >= AI_WORKS.length - 1 ? 0 : i + 1));
+  const prevLightbox = () => setLightboxIndex(i => (i <= 0 ? AI_WORKS_NEWEST_FIRST.length - 1 : i - 1));
+  const nextLightbox = () => setLightboxIndex(i => (i >= AI_WORKS_NEWEST_FIRST.length - 1 ? 0 : i + 1));
 
   return (
     <section
@@ -755,7 +757,7 @@ function AIWorkSection() {
           gap: 4,
           marginBottom: 56,
         }}>
-          {AI_WORKS.map((work, i) => (
+          {AI_WORKS_NEWEST_FIRST.map((work, i) => (
             <AIWorkCard key={work.id} work={work} onOpen={() => setLightboxIndex(i)} />
           ))}
         </div>
