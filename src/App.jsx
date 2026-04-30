@@ -111,14 +111,6 @@ const AI_WORKS = [
     year: "2026",
   },
   {
-    id: 3,
-    type: "image",
-    src: "/ai/ai-03.jpg",
-    description: "A quiet portrait in natural window light — exploring how AI-generated imagery can hold the stillness and texture of a photographic moment.",
-    tools: "Nano Banana",
-    year: "2026",
-  },
-  {
     id: 4,
     src: "/ai/ai-04.mp4",
     description: "An AI-generated moving image study — exploring texture, motion, and atmosphere through a cinematic frame.",
