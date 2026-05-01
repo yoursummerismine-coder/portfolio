@@ -95,14 +95,6 @@ const FILMS = [
 
 const AI_WORKS = [
   {
-    id: 1,
-    src: "/ai/ai-01.mp4",
-    poster: "/ai/posters/ai-01.jpg",
-    description: "Photorealistic portrait — exploring how generative tools can capture the warmth of a candid expression while maintaining the precision of staged cinematography.",
-    tools: "Nano Banana · Kling",
-    year: "2026",
-  },
-  {
     id: 2,
     src: "/ai/ai-02.mp4",
     poster: "/ai/posters/ai-02.jpg",
@@ -632,8 +624,7 @@ function AIWorkLightbox({ index, onClose, onPrev, onNext }) {
           key={work.id}
           src={work.src}
           alt=""
-          style={{ maxWidth: "75vw", maxHeight: "85vh", objectFit: "contain" }}
-          onClick={e => e.stopPropagation()}
+          style={{ maxWidth: "75vw", maxHeight: "85vh", objectFit: "contain", cursor: "zoom-out" }}
         />
       ) : (
       <video
@@ -641,8 +632,7 @@ function AIWorkLightbox({ index, onClose, onPrev, onNext }) {
         src={work.src}
         poster={work.poster}
         autoPlay loop muted playsInline
-        style={{ maxWidth: "75vw", maxHeight: "85vh", objectFit: "contain" }}
-        onClick={e => e.stopPropagation()}
+        style={{ maxWidth: "75vw", maxHeight: "85vh", objectFit: "contain", cursor: "zoom-out" }}
       />
       )}
 
