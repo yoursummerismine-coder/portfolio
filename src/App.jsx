@@ -209,8 +209,8 @@ function HeroSection() {
         setCurrentImg(next);
         setFading(false);
         setNextImg(null);
-      }, 1200);
-    }, 5000);
+      }, 500);
+    }, 3000);
     return () => clearInterval(interval);
   }, [currentImg]);
 
@@ -228,7 +228,7 @@ function HeroSection() {
       {nextImg && <div style={{
         position: "absolute", inset: 0, backgroundImage: `url(${nextImg})`,
         backgroundSize: "cover", backgroundPosition: "center 30%", zIndex: 0,
-        opacity: fading ? 1 : 0, transition: "opacity 1.2s ease",
+        opacity: fading ? 1 : 0, transition: "opacity 0.5s ease",
       }} />}
       <div style={{
         position: "absolute", inset: 0, zIndex: 1,
