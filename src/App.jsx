@@ -195,7 +195,6 @@ function HeroSection() {
   const [loaded, setLoaded] = useState(false);
   const [currentImg, setCurrentImg] = useState(HERO_IMAGE);
   const [nextImg, setNextImg] = useState(null);
-  const [fading, setFading] = useState(false);
 
   useEffect(() => { setTimeout(() => setLoaded(true), 100); }, []);
 
@@ -204,10 +203,8 @@ function HeroSection() {
       const pool = ALL_IMAGES.filter(img => img !== currentImg);
       const next = pool[Math.floor(Math.random() * pool.length)];
       setNextImg(next);
-      setFading(true);
       setTimeout(() => {
         setCurrentImg(next);
-        setFading(false);
         setNextImg(null);
       }, 500);
     }, 3000);
@@ -225,10 +222,10 @@ function HeroSection() {
         opacity: loaded ? 1 : 0, transform: loaded ? "scale(1)" : "scale(1.05)",
         transition: "opacity 1.8s ease 0.2s, transform 3s ease 0s",
       }} />
-      {nextImg && <div style={{
+      {nextImg && <div key={nextImg} style={{
         position: "absolute", inset: 0, backgroundImage: `url(${nextImg})`,
         backgroundSize: "cover", backgroundPosition: "center 30%", zIndex: 0,
-        opacity: fading ? 1 : 0, transition: "opacity 0.5s ease",
+        animation: "heroFadeIn 0.5s ease forwards",
       }} />}
       <div style={{
         position: "absolute", inset: 0, zIndex: 1,
@@ -274,7 +271,10 @@ function HeroSection() {
         <span style={{ fontFamily: "var(--font-body)", fontSize: 9, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--text-muted)" }}>Scroll</span>
         <div style={{ width: 1, height: 32, background: "linear-gradient(180deg, var(--text-muted), transparent)", animation: "scrollPulse 2s ease-in-out infinite" }} />
       </div>
-      <style>{`@keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }`}</style>
+      <style>{`
+        @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+        @keyframes heroFadeIn { from { opacity: 0; } to { opacity: 1; } }
+      `}</style>
     </section>
   );
 }
