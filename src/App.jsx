@@ -164,7 +164,7 @@ const FILMOGRAPHY = [
   { id: 19, title: "물고기도 숨을 쉰다", titleEn: "", year: "2024", role: "Assistant Director", director: "—", format: "Short Film" },
   { id: 5, title: "쓰레기통", titleEn: "Trash Can", year: "2024", role: "Director of Photography", director: "Kim Boae", format: "Short Film" },
   { id: 6, title: "스카이 스위트 한강브릿지 서울", titleEn: "", year: "2024", role: "3rd AC", director: "—", format: "Commercial" },
-  { id: 7, title: "힙지로 직장인 (EP.13, 16, 17, 18)", titleEn: "", year: "2024", role: "Assistant Director", director: "—", format: "Web Drama" },
+  { id: 7, title: "힙지로 직장인 (EP.13, 16, 17, 18)", titleEn: "", year: "2024", role: "3rd Assistant Director", director: "—", format: "Web Drama" },
   { id: 8, title: "KNOCKONMYDOOR — 천재 아니 바보", titleEn: "", year: "2024", role: "2nd AC", director: "—", format: "Music Video" },
   { id: 9, title: "OVERBOOKING", titleEn: "", year: "2023", role: "Director of Photography", director: "—", format: "Short Film" },
   { id: 10, title: "2023 무비히어로 캠페인", titleEn: "", year: "2023", role: "Assistant Director", director: "—", format: "Campaign" },
@@ -203,7 +203,7 @@ function Nav({ activeSection, onNavigate }) {
         fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 400,
         letterSpacing: "0.04em", color: "var(--text-primary)",
       }}>Kyujin</button>
-      <div style={{ display: "flex", gap: 32 }}>
+      <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
         {NAV_ITEMS.map((item) => (
           <button key={item} onClick={() => onNavigate(item.toLowerCase())} style={{
             background: "none", border: "none", cursor: "pointer",
@@ -214,6 +214,16 @@ function Nav({ activeSection, onNavigate }) {
             borderBottom: activeSection === item.toLowerCase() ? "1px solid var(--accent-dim)" : "1px solid transparent",
           }}>{item}</button>
         ))}
+        <a href="#/career" style={{
+          fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 400,
+          letterSpacing: "0.12em", textTransform: "uppercase",
+          color: "var(--accent)", textDecoration: "none",
+          padding: "8px 16px", border: "1px solid var(--accent-dim)",
+          transition: "all 0.3s ease",
+        }}
+          onMouseEnter={e => { e.currentTarget.style.background = "var(--accent)"; e.currentTarget.style.color = "var(--bg-primary)"; e.currentTarget.style.borderColor = "var(--accent)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--accent)"; e.currentTarget.style.borderColor = "var(--accent-dim)"; }}
+        >Career</a>
       </div>
     </nav>
   );
@@ -536,16 +546,21 @@ function AboutSection() {
         </div>
       </FadeIn>
       <FadeIn delay={0.45}>
-        <div style={{ marginTop: 48 }}>
+        <div style={{ marginTop: 56 }}>
           <a href="#/career" style={{
-            display: "inline-flex", alignItems: "center", gap: 10,
-            fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 400,
-            letterSpacing: "0.15em", textTransform: "uppercase",
-            color: "var(--accent)", textDecoration: "none",
-            paddingBottom: 4, borderBottom: "1px solid var(--accent-dim)",
-          }}>
+            display: "inline-flex", alignItems: "center", gap: 14,
+            fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 400,
+            letterSpacing: "0.2em", textTransform: "uppercase",
+            color: "var(--bg-primary)", background: "var(--accent)",
+            textDecoration: "none", padding: "18px 36px",
+            border: "1px solid var(--accent)",
+            transition: "all 0.35s ease",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--accent)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "var(--accent)"; e.currentTarget.style.color = "var(--bg-primary)"; }}
+          >
             View Full Career
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
           </a>
         </div>
       </FadeIn>
