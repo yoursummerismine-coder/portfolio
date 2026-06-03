@@ -155,6 +155,34 @@ const AI_WORKS = [
 
 const AI_WORKS_NEWEST_FIRST = [...AI_WORKS].sort((a, b) => b.id - a.id);
 
+// === Career data (placeholder — replace with real entries) ===
+const EXPERIENCE = [
+  {
+    id: 1,
+    company: "Studio Placeholder",
+    role: "Cinematographer",
+    period: "2025 — Present",
+    location: "Seoul",
+    description: "Commercial and short-form work focused on cinematic lighting and color.",
+  },
+  {
+    id: 2,
+    company: "Independent Production",
+    role: "Gaffer · Camera Assistant",
+    period: "2023 — 2024",
+    location: "Seoul",
+    description: "On-set lighting and camera support across independent shorts and student productions.",
+  },
+];
+
+const FILMOGRAPHY = [
+  { id: 1, title: "Ear Candle", titleKr: "이봉", year: "2026", role: "Director of Photography · DI Colorist", director: "Park Jinyeong", format: "Short Film" },
+  { id: 2, title: "Trash Can", titleKr: "쓰레기통", year: "2024", role: "Director of Photography", director: "Kim Boae", format: "Short Film" },
+  { id: 3, title: "How to Dispose of Tangerine Box", titleKr: "귤박스를 처리하는 방법", year: "2023", role: "Gaffer", director: "Cha Hyunseo", format: "Short Film" },
+  { id: 4, title: "Untitled Project", titleKr: "", year: "2023", role: "Camera Assistant", director: "—", format: "Short Film" },
+  { id: 5, title: "Untitled Project", titleKr: "", year: "2022", role: "Lighting Assistant", director: "—", format: "Short Film" },
+];
+
 
 
 function Nav({ activeSection, onNavigate }) {
@@ -512,6 +540,20 @@ function AboutSection() {
           ))}
         </div>
       </FadeIn>
+      <FadeIn delay={0.45}>
+        <div style={{ marginTop: 48 }}>
+          <a href="#/career" style={{
+            display: "inline-flex", alignItems: "center", gap: 10,
+            fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 400,
+            letterSpacing: "0.15em", textTransform: "uppercase",
+            color: "var(--accent)", textDecoration: "none",
+            paddingBottom: 4, borderBottom: "1px solid var(--accent-dim)",
+          }}>
+            View Full Career
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+          </a>
+        </div>
+      </FadeIn>
     </section>
   );
 }
@@ -809,7 +851,135 @@ function AIWorkSection() {
   );
 }
 
+function CareerPage() {
+  return (
+    <div style={{ minHeight: "100vh", background: "var(--bg-primary)", color: "var(--text-primary)" }}>
+      {/* Minimal top bar with back link */}
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        padding: "0 clamp(24px, 5vw, 80px)", height: 64,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        background: "rgba(10,10,10,0.92)", backdropFilter: "blur(12px)",
+        borderBottom: "1px solid var(--border)",
+      }}>
+        <a href="#" style={{
+          background: "none", border: "none", cursor: "pointer",
+          fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 400,
+          letterSpacing: "0.04em", color: "var(--text-primary)", textDecoration: "none",
+        }}>Kyujin</a>
+        <a href="#" style={{
+          display: "inline-flex", alignItems: "center", gap: 8,
+          fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.15em",
+          textTransform: "uppercase", color: "var(--text-secondary)", textDecoration: "none",
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M19 12H5M5 12l7-7M5 12l7 7" /></svg>
+          Back
+        </a>
+      </nav>
+
+      <main style={{ padding: "clamp(120px, 16vh, 200px) clamp(24px, 5vw, 80px) clamp(80px, 12vh, 160px)" }}>
+        <FadeIn>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>Career</p>
+          <h1 style={{
+            fontFamily: "var(--font-display)", fontSize: "clamp(40px, 6vw, 80px)",
+            fontWeight: 300, fontStyle: "italic", lineHeight: 1.1,
+            color: "var(--text-primary)", marginBottom: 64,
+          }}>
+            A record of work<br />and collaboration.
+          </h1>
+        </FadeIn>
+
+        {/* Experience */}
+        <FadeIn delay={0.1}>
+          <section style={{ marginBottom: 96 }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--accent-dim)", marginBottom: 32 }}>
+              I. Experience
+            </p>
+            <div style={{ borderTop: "1px solid var(--border)" }}>
+              {EXPERIENCE.map((item) => (
+                <article key={item.id} style={{
+                  padding: "32px 0", borderBottom: "1px solid var(--border)",
+                  display: "grid", gridTemplateColumns: "180px 1fr", gap: 32,
+                }}>
+                  <div>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.1em", color: "var(--text-muted)" }}>{item.period}</p>
+                    {item.location && (
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-muted)", marginTop: 6, opacity: 0.7 }}>{item.location}</p>
+                    )}
+                  </div>
+                  <div>
+                    <h3 style={{
+                      fontFamily: "var(--font-display)", fontSize: "clamp(20px, 2.4vw, 26px)",
+                      fontWeight: 400, fontStyle: "italic", color: "var(--text-primary)",
+                      lineHeight: 1.3, marginBottom: 6,
+                    }}>{item.company}</h3>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: 12, letterSpacing: "0.08em", color: "var(--accent-dim)", textTransform: "uppercase", marginBottom: 12 }}>{item.role}</p>
+                    {item.description && (
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.8, color: "var(--text-secondary)", maxWidth: 620 }}>{item.description}</p>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </FadeIn>
+
+        {/* Filmography */}
+        <FadeIn delay={0.2}>
+          <section>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--accent-dim)", marginBottom: 32 }}>
+              II. Filmography
+            </p>
+            <div style={{ borderTop: "1px solid var(--border)" }}>
+              {FILMOGRAPHY.map((item) => (
+                <article key={item.id} style={{
+                  padding: "24px 0", borderBottom: "1px solid var(--border)",
+                  display: "grid", gridTemplateColumns: "80px 1fr 1fr", gap: 24,
+                  alignItems: "baseline",
+                }}>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: 12, letterSpacing: "0.1em", color: "var(--text-muted)" }}>{item.year}</p>
+                  <div>
+                    <h3 style={{
+                      fontFamily: "var(--font-display)", fontSize: "clamp(18px, 2vw, 22px)",
+                      fontWeight: 400, fontStyle: "italic", color: "var(--text-primary)", lineHeight: 1.3,
+                    }}>
+                      {item.title}
+                      {item.titleKr && (
+                        <span style={{ fontSize: "0.7em", fontStyle: "normal", fontWeight: 300, color: "var(--text-muted)", marginLeft: 10 }}>{item.titleKr}</span>
+                      )}
+                    </h3>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-muted)", marginTop: 4, letterSpacing: "0.05em" }}>
+                      {item.format}{item.director && item.director !== "—" ? ` · Dir. ${item.director}` : ""}
+                    </p>
+                  </div>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent-dim)", textAlign: "right" }}>{item.role}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </FadeIn>
+      </main>
+
+      <footer style={{ padding: "32px clamp(24px, 5vw, 80px)", borderTop: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: 10, letterSpacing: "0.08em", color: "var(--text-muted)" }}>© 2026 Kyujin. All rights reserved.</p>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: 10, letterSpacing: "0.08em", color: "var(--text-muted)", fontStyle: "italic" }}>Every frame is a decision.</p>
+      </footer>
+    </div>
+  );
+}
+
+function useHashRoute() {
+  const [hash, setHash] = useState(typeof window !== "undefined" ? window.location.hash : "");
+  useEffect(() => {
+    const onChange = () => { setHash(window.location.hash); window.scrollTo(0, 0); };
+    window.addEventListener("hashchange", onChange);
+    return () => window.removeEventListener("hashchange", onChange);
+  }, []);
+  return hash;
+}
+
 export default function Portfolio() {
+  const hash = useHashRoute();
   const [activeSection, setActiveSection] = useState("");
   useEffect(() => {
     const s = document.createElement("style"); s.textContent = FONTS_CSS;
@@ -832,6 +1002,10 @@ export default function Portfolio() {
     const el = document.getElementById(targetId);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
+
+  if (hash === "#/career") {
+    return <CareerPage />;
+  }
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg-primary)", color: "var(--text-primary)" }}>
