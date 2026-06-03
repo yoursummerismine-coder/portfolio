@@ -161,6 +161,7 @@ const FILMOGRAPHY = [
   { id: 2, title: "쿠쿠 리네이처 메디킨하이", titleEn: "", year: "2026", role: "3rd AC", director: "—", format: "Commercial" },
   { id: 3, title: "누가 내 십자가를 훔쳐갔는가?", titleEn: "", year: "2025", role: "3rd AC", director: "—", format: "Feature Film" },
   { id: 4, title: "1993년", titleEn: "", year: "2025", role: "3rd AC", director: "—", format: "Music Video" },
+  { id: 19, title: "물고기도 숨을 쉰다", titleEn: "", year: "2024", role: "Assistant Director", director: "—", format: "Short Film" },
   { id: 5, title: "쓰레기통", titleEn: "Trash Can", year: "2024", role: "Director of Photography", director: "Kim Boae", format: "Short Film" },
   { id: 6, title: "스카이 스위트 한강브릿지 서울", titleEn: "", year: "2024", role: "3rd AC", director: "—", format: "Commercial" },
   { id: 7, title: "힙지로 직장인 (EP.13, 16, 17, 18)", titleEn: "", year: "2024", role: "Assistant Director", director: "—", format: "Web Drama" },
