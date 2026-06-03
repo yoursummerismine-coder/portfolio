@@ -155,32 +155,26 @@ const AI_WORKS = [
 
 const AI_WORKS_NEWEST_FIRST = [...AI_WORKS].sort((a, b) => b.id - a.id);
 
-// === Career data (placeholder — replace with real entries) ===
-const EXPERIENCE = [
-  {
-    id: 1,
-    company: "Studio Placeholder",
-    role: "Cinematographer",
-    period: "2025 — Present",
-    location: "Seoul",
-    description: "Commercial and short-form work focused on cinematic lighting and color.",
-  },
-  {
-    id: 2,
-    company: "Independent Production",
-    role: "Gaffer · Camera Assistant",
-    period: "2023 — 2024",
-    location: "Seoul",
-    description: "On-set lighting and camera support across independent shorts and student productions.",
-  },
-];
-
+// === Career data ===
 const FILMOGRAPHY = [
-  { id: 1, title: "Ear Candle", titleKr: "이봉", year: "2026", role: "Director of Photography · DI Colorist", director: "Park Jinyeong", format: "Short Film" },
-  { id: 2, title: "Trash Can", titleKr: "쓰레기통", year: "2024", role: "Director of Photography", director: "Kim Boae", format: "Short Film" },
-  { id: 3, title: "How to Dispose of Tangerine Box", titleKr: "귤박스를 처리하는 방법", year: "2023", role: "Gaffer", director: "Cha Hyunseo", format: "Short Film" },
-  { id: 4, title: "Untitled Project", titleKr: "", year: "2023", role: "Camera Assistant", director: "—", format: "Short Film" },
-  { id: 5, title: "Untitled Project", titleKr: "", year: "2022", role: "Lighting Assistant", director: "—", format: "Short Film" },
+  { id: 1, title: "이봉", titleEn: "Ear Candle", year: "2026", role: "Director of Photography", director: "Park Jinyeong", format: "Short Film" },
+  { id: 2, title: "쿠쿠 리네이처 메디킨하이", titleEn: "", year: "2026", role: "3rd AC", director: "—", format: "Commercial" },
+  { id: 3, title: "누가 내 십자가를 훔쳐갔는가?", titleEn: "", year: "2025", role: "3rd AC", director: "—", format: "Feature Film" },
+  { id: 4, title: "1993년", titleEn: "", year: "2025", role: "3rd AC", director: "—", format: "Music Video" },
+  { id: 5, title: "쓰레기통", titleEn: "Trash Can", year: "2024", role: "Director of Photography", director: "Kim Boae", format: "Short Film" },
+  { id: 6, title: "스카이 스위트 한강브릿지 서울", titleEn: "", year: "2024", role: "3rd AC", director: "—", format: "Commercial" },
+  { id: 7, title: "힙지로 직장인 (EP.13, 16, 17, 18)", titleEn: "", year: "2024", role: "Assistant Director", director: "—", format: "Web Drama" },
+  { id: 8, title: "KNOCKONMYDOOR — 천재 아니 바보", titleEn: "", year: "2024", role: "2nd AC", director: "—", format: "Music Video" },
+  { id: 9, title: "OVERBOOKING", titleEn: "", year: "2023", role: "Director of Photography", director: "—", format: "Short Film" },
+  { id: 10, title: "2023 무비히어로 캠페인", titleEn: "", year: "2023", role: "Assistant Director", director: "—", format: "Campaign" },
+  { id: 11, title: "막세판", titleEn: "", year: "2023", role: "2nd AC", director: "—", format: "Short Film" },
+  { id: 12, title: "얼씨구", titleEn: "", year: "2023", role: "3rd AC", director: "—", format: "Short Film" },
+  { id: 13, title: "귤박스를 처리하는 방법", titleEn: "How to Dispose of Tangerine Box", year: "2023", role: "Gaffer", director: "Cha Hyunseo", format: "Short Film" },
+  { id: 14, title: "좋아요", titleEn: "", year: "2022", role: "Director of Photography", director: "—", format: "Short Film" },
+  { id: 15, title: "나의 연필은 무기가 되어", titleEn: "", year: "2022", role: "Set Helper", director: "—", format: "Short Film" },
+  { id: 16, title: "5월이란?", titleEn: "", year: "2022", role: "Gaffer", director: "—", format: "Documentary" },
+  { id: 17, title: "낚시", titleEn: "", year: "2022", role: "3rd AC", director: "—", format: "Short Film" },
+  { id: 18, title: "잔아 박물관 홍보 영상", titleEn: "", year: "2020", role: "Director · DP · Editor", director: "—", format: "Viral Video" },
 ];
 
 
@@ -889,46 +883,11 @@ function CareerPage() {
           </h1>
         </FadeIn>
 
-        {/* Experience */}
-        <FadeIn delay={0.1}>
-          <section style={{ marginBottom: 96 }}>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--accent-dim)", marginBottom: 32 }}>
-              I. Experience
-            </p>
-            <div style={{ borderTop: "1px solid var(--border)" }}>
-              {EXPERIENCE.map((item) => (
-                <article key={item.id} style={{
-                  padding: "32px 0", borderBottom: "1px solid var(--border)",
-                  display: "grid", gridTemplateColumns: "180px 1fr", gap: 32,
-                }}>
-                  <div>
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.1em", color: "var(--text-muted)" }}>{item.period}</p>
-                    {item.location && (
-                      <p style={{ fontFamily: "var(--font-body)", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-muted)", marginTop: 6, opacity: 0.7 }}>{item.location}</p>
-                    )}
-                  </div>
-                  <div>
-                    <h3 style={{
-                      fontFamily: "var(--font-display)", fontSize: "clamp(20px, 2.4vw, 26px)",
-                      fontWeight: 400, fontStyle: "italic", color: "var(--text-primary)",
-                      lineHeight: 1.3, marginBottom: 6,
-                    }}>{item.company}</h3>
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: 12, letterSpacing: "0.08em", color: "var(--accent-dim)", textTransform: "uppercase", marginBottom: 12 }}>{item.role}</p>
-                    {item.description && (
-                      <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.8, color: "var(--text-secondary)", maxWidth: 620 }}>{item.description}</p>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        </FadeIn>
-
         {/* Filmography */}
-        <FadeIn delay={0.2}>
+        <FadeIn delay={0.1}>
           <section>
             <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--accent-dim)", marginBottom: 32 }}>
-              II. Filmography
+              Filmography
             </p>
             <div style={{ borderTop: "1px solid var(--border)" }}>
               {FILMOGRAPHY.map((item) => (
@@ -944,8 +903,8 @@ function CareerPage() {
                       fontWeight: 400, fontStyle: "italic", color: "var(--text-primary)", lineHeight: 1.3,
                     }}>
                       {item.title}
-                      {item.titleKr && (
-                        <span style={{ fontSize: "0.7em", fontStyle: "normal", fontWeight: 300, color: "var(--text-muted)", marginLeft: 10 }}>{item.titleKr}</span>
+                      {item.titleEn && (
+                        <span style={{ fontSize: "0.7em", fontStyle: "normal", fontWeight: 300, color: "var(--text-muted)", marginLeft: 10 }}>{item.titleEn}</span>
                       )}
                     </h3>
                     <p style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--text-muted)", marginTop: 4, letterSpacing: "0.05em" }}>
