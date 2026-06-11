@@ -151,6 +151,13 @@ const AI_WORKS = [
     tools: "NANO BANANA • RUNWAY GEN-4.5",
     year: "2026",
   },
+  {
+    id: 1,
+    src: "/ai/ai-11.mp4",
+    description: "A generative video study composed through cinematic motion and atmospheric texture.",
+    tools: "Midjourney · Kling",
+    year: "2026",
+  },
 ];
 
 const AI_WORKS_NEWEST_FIRST = [...AI_WORKS].sort((a, b) => b.id - a.id);
