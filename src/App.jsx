@@ -27,13 +27,15 @@ const FONTS_CSS = `
   --text-muted: #5a5650;
   --accent: #c4a97d;
   --accent-dim: #8a7a5e;
-  --border: #222220;
+  --border: #1c1c1a;
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Libre Franklin', sans-serif;
+  --eyebrow: 10px;
+  --track-eyebrow: 0.3em;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--bg-primary); }
-body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--bg-primary); }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
@@ -306,25 +308,26 @@ function HeroSection() {
       }} />
       <div style={{ position: "relative", zIndex: 3 }}>
         <p style={{
-          fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 400,
-          letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)",
-          marginBottom: 20, opacity: loaded ? 1 : 0,
+          fontFamily: "var(--font-body)", fontSize: "var(--eyebrow)", fontWeight: 400,
+          letterSpacing: "var(--track-eyebrow)", textTransform: "uppercase", color: "var(--text-muted)",
+          marginBottom: 24, opacity: loaded ? 1 : 0,
           transform: loaded ? "translateY(0)" : "translateY(12px)", transition: "all 1s ease 0.3s",
         }}>Cinematographer</p>
         <h1 style={{
-          fontFamily: "var(--font-display)", fontSize: "clamp(48px, 8vw, 112px)",
-          fontWeight: 300, lineHeight: 0.95, letterSpacing: "-0.01em",
+          fontFamily: "var(--font-display)", fontSize: "clamp(52px, 8.5vw, 124px)",
+          fontWeight: 300, lineHeight: 0.92, letterSpacing: "-0.025em",
           color: "var(--text-primary)", opacity: loaded ? 1 : 0,
           transform: loaded ? "translateY(0)" : "translateY(20px)", transition: "all 1.2s ease 0.5s",
         }}>Kyujin</h1>
         <div style={{
-          marginTop: 32, width: 48, height: 1, background: "var(--accent-dim)",
+          marginTop: 36, width: 56, height: 1, background: "var(--accent-dim)",
           opacity: loaded ? 1 : 0, transform: loaded ? "scaleX(1)" : "scaleX(0)",
           transformOrigin: "left", transition: "all 1s ease 0.9s",
         }} />
         <p style={{
           fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300,
-          color: "var(--text-secondary)", marginTop: 20, lineHeight: 1.7, maxWidth: 420,
+          color: "var(--text-secondary)", marginTop: 24, lineHeight: 1.85, maxWidth: 430,
+          letterSpacing: "0.01em",
           opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(12px)",
           transition: "all 1s ease 1.1s",
         }}>
@@ -523,9 +526,9 @@ function FilmCard({ film, index }) {
 
 function AboutSection() {
   return (
-    <section id="about" style={{ padding: "clamp(80px, 12vh, 160px) clamp(24px, 5vw, 80px)", borderTop: "1px solid var(--border)" }}>
+    <section id="about" style={{ padding: "clamp(100px, 15vh, 200px) clamp(24px, 5vw, 80px)", borderTop: "1px solid var(--border)" }}>
       <FadeIn>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 40 }}>About</p>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--eyebrow)", letterSpacing: "var(--track-eyebrow)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 40 }}>About</p>
       </FadeIn>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(40px, 6vw, 80px)" }}>
         <FadeIn delay={0.1}>
@@ -584,9 +587,9 @@ function AboutSection() {
 
 function ContactSection() {
   return (
-    <section id="contact" style={{ padding: "clamp(80px, 12vh, 160px) clamp(24px, 5vw, 80px)", borderTop: "1px solid var(--border)" }}>
+    <section id="contact" style={{ padding: "clamp(100px, 15vh, 200px) clamp(24px, 5vw, 80px)", borderTop: "1px solid var(--border)" }}>
       <FadeIn>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 40 }}>Contact</p>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--eyebrow)", letterSpacing: "var(--track-eyebrow)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 40 }}>Contact</p>
       </FadeIn>
       <FadeIn delay={0.1}>
         <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 300, lineHeight: 1.3, color: "var(--text-primary)", marginBottom: 40 }}>
@@ -780,18 +783,18 @@ function AIWorkSection() {
     <section
       id="ai-work"
       style={{
-        padding: "clamp(80px, 12vh, 160px) clamp(24px, 5vw, 80px) 0",
+        padding: "clamp(100px, 15vh, 200px) clamp(24px, 5vw, 80px) 0",
         borderTop: "1px solid var(--border)",
       }}
     >
       <FadeIn>
         <p style={{
           fontFamily: "var(--font-body)",
-          fontSize: 11,
-          letterSpacing: "0.2em",
+          fontSize: "var(--eyebrow)",
+          letterSpacing: "var(--track-eyebrow)",
           textTransform: "uppercase",
           color: "var(--text-muted)",
-          marginBottom: 16,
+          marginBottom: 18,
         }}>
           Chapter II
         </p>
@@ -803,6 +806,7 @@ function AIWorkSection() {
           color: "var(--text-primary)",
           marginBottom: 12,
           lineHeight: 1.1,
+          letterSpacing: "-0.015em",
         }}>
           AI Work
         </h2>
@@ -901,9 +905,9 @@ function CareerPage() {
         </a>
       </nav>
 
-      <main style={{ padding: "clamp(120px, 16vh, 200px) clamp(24px, 5vw, 80px) clamp(80px, 12vh, 160px)" }}>
+      <main style={{ padding: "clamp(120px, 16vh, 200px) clamp(24px, 5vw, 80px) clamp(100px, 15vh, 200px)" }}>
         <FadeIn>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>Career</p>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--eyebrow)", letterSpacing: "var(--track-eyebrow)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>Career</p>
           <h1 style={{
             fontFamily: "var(--font-display)", fontSize: "clamp(40px, 6vw, 80px)",
             fontWeight: 300, fontStyle: "italic", lineHeight: 1.1,
@@ -916,7 +920,7 @@ function CareerPage() {
         {/* Filmography */}
         <FadeIn delay={0.1}>
           <section>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--accent-dim)", marginBottom: 32 }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--eyebrow)", letterSpacing: "var(--track-eyebrow)", textTransform: "uppercase", color: "var(--accent-dim)", marginBottom: 32 }}>
               Filmography
             </p>
             <div style={{ borderTop: "1px solid var(--border)" }}>
@@ -1000,9 +1004,9 @@ export default function Portfolio() {
     <div style={{ minHeight: "100vh", background: "var(--bg-primary)", color: "var(--text-primary)" }}>
       <Nav activeSection={activeSection} onNavigate={scrollTo} />
       <HeroSection />
-      <section id="films" style={{ padding: "clamp(80px, 12vh, 160px) clamp(24px, 5vw, 80px) 0" }}>
+      <section id="films" style={{ padding: "clamp(100px, 15vh, 200px) clamp(24px, 5vw, 80px) 0" }}>
         <FadeIn>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 56 }}>Selected Films</p>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--eyebrow)", letterSpacing: "var(--track-eyebrow)", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 56 }}>Selected Films</p>
         </FadeIn>
         {FILMS.map((film, i) => (<FilmCard key={film.id} film={film} index={i} />))}
       </section>
