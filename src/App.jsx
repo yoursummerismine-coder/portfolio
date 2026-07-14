@@ -97,6 +97,12 @@ const FILMS = [
 
 const AI_WORKS = [
   {
+    id: 15,
+    src: "/ai/ai-16.mp4",
+    description: "A generative video study composed through cinematic motion and atmospheric texture.",
+    year: "2026",
+  },
+  {
     id: 14,
     src: "/ai/ai-13.mp4",
     description: "A generative video study composed through cinematic motion and atmospheric texture.",
