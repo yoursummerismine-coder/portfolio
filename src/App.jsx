@@ -97,6 +97,24 @@ const FILMS = [
 
 const AI_WORKS = [
   {
+    id: 14,
+    src: "/ai/ai-13.mp4",
+    description: "A generative video study composed through cinematic motion and atmospheric texture.",
+    year: "2026",
+  },
+  {
+    id: 13,
+    src: "/ai/ai-14.mp4",
+    description: "A generative video study composed through cinematic motion and atmospheric texture.",
+    year: "2026",
+  },
+  {
+    id: 12,
+    src: "/ai/ai-15.mp4",
+    description: "A generative video study composed through cinematic motion and atmospheric texture.",
+    year: "2026",
+  },
+  {
     id: 11,
     src: "/ai/ai-12.mp4",
     description: "A generative video study composed through cinematic motion and atmospheric texture.",
@@ -661,27 +679,31 @@ function AIWorkCard({ work, onOpen }) {
         }}
       />
       )}
-      <div style={{
-        position: "absolute", inset: 0,
-        background: "linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.85) 100%)",
-        pointerEvents: "none",
-      }} />
-      <div style={{
-        position: "absolute", bottom: 0, left: 0, right: 0,
-        padding: "16px 20px",
-        pointerEvents: "none",
-      }}>
-        <p style={{
-          fontFamily: "var(--font-body)",
-          fontSize: 10,
-          letterSpacing: "0.15em",
-          textTransform: "uppercase",
-          color: "var(--accent)",
-          marginBottom: 4,
-        }}>
-          {work.tools}
-        </p>
-      </div>
+      {work.tools && (
+        <>
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.85) 100%)",
+            pointerEvents: "none",
+          }} />
+          <div style={{
+            position: "absolute", bottom: 0, left: 0, right: 0,
+            padding: "16px 20px",
+            pointerEvents: "none",
+          }}>
+            <p style={{
+              fontFamily: "var(--font-body)",
+              fontSize: 10,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              marginBottom: 4,
+            }}>
+              {work.tools}
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }
