@@ -71,6 +71,9 @@ export const FILMS = [
 ];
 
 export const AI_WORKS = [
+  { id: 18, src: "/ai/ai-17.mp4", poster: "/ai/posters/ai-17.jpg", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
+  { id: 17, src: "/ai/ai-18.mp4", poster: "/ai/posters/ai-18.jpg", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
+  { id: 16, src: "/ai/ai-19.mp4", poster: "/ai/posters/ai-19.jpg", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "Seedance 2.0 · ComfyUI", year: "2026" },
   { id: 15, src: "/ai/ai-16.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
   { id: 14, src: "/ai/ai-13.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
   { id: 13, src: "/ai/ai-14.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
