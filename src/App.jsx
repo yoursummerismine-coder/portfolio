@@ -39,7 +39,7 @@ function useReducedMotion() {
   return reduced;
 }
 
-function Header({ activeSection = "", career = false, onNavigate }) {
+function Header({ activeSection = "", crew = false, onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNavigate = (id) => {
@@ -49,11 +49,11 @@ function Header({ activeSection = "", career = false, onNavigate }) {
 
   return (
     <header className="site-header">
-      <a className="brand" href={career ? "#" : "#hero"} aria-label="Kyujin portfolio home">
+      <a className="brand" href={crew ? "#" : "#hero"} aria-label="Kyujin portfolio home">
         Kyujin
       </a>
 
-      {!career && (
+      {!crew && (
         <button
           className="menu-toggle"
           type="button"
@@ -65,7 +65,7 @@ function Header({ activeSection = "", career = false, onNavigate }) {
         </button>
       )}
 
-      {career ? (
+      {crew ? (
         <a className="back-link" href="#">
           <Arrow direction="left" />
           Back to portfolio
@@ -87,8 +87,8 @@ function Header({ activeSection = "", career = false, onNavigate }) {
               {item.label}
             </button>
           ))}
-          <a className="nav-link" href="#/career">
-            Career
+          <a className="nav-link" href="#/crew">
+            Crew
           </a>
         </nav>
       )}
@@ -328,7 +328,7 @@ function AIWorkCard({ work, index, onOpen }) {
       onClick={onOpen}
       aria-label={`Open AI moving image study ${index + 1}`}
     >
-      <span className="ai-media">
+      <span className="ai-media" style={work.aspect ? { "--ai-aspect": work.aspect } : undefined}>
         <video src={work.src} poster={work.poster} muted playsInline preload="metadata" />
         <span className="play-mark" aria-hidden="true">Play</span>
       </span>
@@ -405,8 +405,8 @@ function AboutSection() {
           </div>
         ))}
       </dl>
-      <a className="career-callout" href="#/career">
-        <span>View full career</span>
+      <a className="crew-callout" href="#/crew">
+        <span>View crew work</span>
         <Arrow />
       </a>
     </section>
@@ -439,23 +439,23 @@ function Footer() {
   );
 }
 
-function CareerPage() {
+function CrewPage() {
   return (
     <div className="page-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <Header career />
-      <main className="career-page" id="main-content">
-        <header className="career-hero">
-          <p className="section-number">Career / Selected credits</p>
-          <h1>A record of work and collaboration.</h1>
+      <Header crew />
+      <main className="crew-page" id="main-content">
+        <header className="crew-hero">
+          <p className="section-number">Crew / Selected credits</p>
+          <h1>Crew Work</h1>
           <p>Camera department, cinematography, lighting and direction · 2020—2026</p>
         </header>
 
-        <section className="career-list" aria-labelledby="filmography-title">
+        <section className="crew-list" aria-labelledby="filmography-title">
           <h2 id="filmography-title">Filmography</h2>
-          <div className="career-table" role="list">
+          <div className="crew-table" role="list">
             {FILMOGRAPHY.map((item, index) => (
-              <article className="career-row" role="listitem" key={item.id}>
+              <article className="crew-row" role="listitem" key={item.id}>
                 <p>{item.year}</p>
                 <div>
                   <h3>
@@ -495,9 +495,11 @@ export default function Portfolio() {
   const hash = useHashRoute();
   const reducedMotion = useReducedMotion();
   const [activeSection, setActiveSection] = useState("");
+  // "#/career" is the previous URL for this page; keep it working for shared links.
+  const isCrewRoute = hash === "#/crew" || hash === "#/career";
 
   useEffect(() => {
-    if (hash === "#/career") return undefined;
+    if (isCrewRoute) return undefined;
     const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(Boolean);
     const observer = new IntersectionObserver(
       (entries) => {
@@ -510,13 +512,13 @@ export default function Portfolio() {
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [hash]);
+  }, [isCrewRoute]);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
   };
 
-  if (hash === "#/career") return <CareerPage />;
+  if (isCrewRoute) return <CrewPage />;
 
   return (
     <div className="page-shell">

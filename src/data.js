@@ -70,24 +70,26 @@ export const FILMS = [
   },
 ];
 
+// `aspect` is the source file's native frame ratio, measured with ffprobe.
+// Cards render at this ratio so no work is cropped to a uniform tile.
 export const AI_WORKS = [
-  { id: 18, src: "/ai/ai-17.mp4", poster: "/ai/posters/ai-17.jpg", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
-  { id: 17, src: "/ai/ai-18.mp4", poster: "/ai/posters/ai-18.jpg", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
-  { id: 16, src: "/ai/ai-19.mp4", poster: "/ai/posters/ai-19.jpg", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "Seedance 2.0 · ComfyUI", year: "2026" },
-  { id: 15, src: "/ai/ai-16.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
-  { id: 14, src: "/ai/ai-13.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
-  { id: 13, src: "/ai/ai-14.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
-  { id: 12, src: "/ai/ai-15.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
-  { id: 11, src: "/ai/ai-12.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "GPT Image 2 · SEEDANCE 2.0", year: "2026" },
-  { id: 10, src: "/ai/ai-10.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "GPT Image 2 · SEEDANCE 2.0", year: "2026" },
-  { id: 9, src: "/ai/ai-09.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "GPT Image 2 · SEEDANCE 2.0", year: "2026" },
-  { id: 8, src: "/ai/ai-08.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "GPT Image 2 · SEEDANCE 2.0", year: "2026" },
-  { id: 7, src: "/ai/ai-07.mp4", description: "A generative video study focused on cinematic movement and atmospheric texture.", tools: "NANO BANANA · RUNWAY GEN-4.5", year: "2026" },
-  { id: 6, src: "/ai/ai-06.mp4", description: "A generative video study composed through AI-driven motion and cinematic atmosphere.", tools: "SEEDANCE 2.0", year: "2026" },
-  { id: 5, src: "/ai/ai-05.mp4", description: "A generative video study shaped through motion, texture, and cinematic atmosphere.", tools: "Runway Gen-4.5", year: "2026" },
-  { id: 4, src: "/ai/ai-04.mp4", description: "An AI-generated moving image study — exploring texture, motion, and atmosphere through a cinematic frame.", tools: "Runway Aleph", year: "2026" },
-  { id: 2, src: "/ai/ai-02.mp4", poster: "/ai/posters/ai-02.jpg", description: "An exercise in surreal mise-en-scène. Suspended blossoms frame a single figure, blending photographic realism with a painterly, dreamlike composition.", tools: "Nano Banana · Kling", year: "2026" },
-  { id: 1, src: "/ai/ai-11.mp4", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "Midjourney · Kling", year: "2026" },
+  { id: 18, src: "/ai/ai-17.mp4", poster: "/ai/posters/ai-17.jpg", aspect: "2206 / 946", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
+  { id: 17, src: "/ai/ai-18.mp4", poster: "/ai/posters/ai-18.jpg", aspect: "4096 / 1716", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
+  { id: 16, src: "/ai/ai-19.mp4", poster: "/ai/posters/ai-19.jpg", aspect: "2206 / 946", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "Seedance 2.0 · ComfyUI", year: "2026" },
+  { id: 15, src: "/ai/ai-16.mp4", aspect: "1984 / 864", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
+  { id: 14, src: "/ai/ai-13.mp4", aspect: "1920 / 1080", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
+  { id: 13, src: "/ai/ai-14.mp4", aspect: "2580 / 1080", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
+  { id: 12, src: "/ai/ai-15.mp4", aspect: "1920 / 1080", description: "A generative video study composed through cinematic motion and atmospheric texture.", year: "2026" },
+  { id: 11, src: "/ai/ai-12.mp4", aspect: "3072 / 2048", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "GPT Image 2 · SEEDANCE 2.0", year: "2026" },
+  { id: 10, src: "/ai/ai-10.mp4", aspect: "3840 / 2160", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "GPT Image 2 · SEEDANCE 2.0", year: "2026" },
+  { id: 9, src: "/ai/ai-09.mp4", aspect: "1828 / 1332", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "GPT Image 2 · SEEDANCE 2.0", year: "2026" },
+  { id: 8, src: "/ai/ai-08.mp4", aspect: "1920 / 1080", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "GPT Image 2 · SEEDANCE 2.0", year: "2026" },
+  { id: 7, src: "/ai/ai-07.mp4", aspect: "3832 / 2160", description: "A generative video study focused on cinematic movement and atmospheric texture.", tools: "NANO BANANA · RUNWAY GEN-4.5", year: "2026" },
+  { id: 6, src: "/ai/ai-06.mp4", aspect: "3840 / 2160", description: "A generative video study composed through AI-driven motion and cinematic atmosphere.", tools: "SEEDANCE 2.0", year: "2026" },
+  { id: 5, src: "/ai/ai-05.mp4", aspect: "1920 / 1080", description: "A generative video study shaped through motion, texture, and cinematic atmosphere.", tools: "Runway Gen-4.5", year: "2026" },
+  { id: 4, src: "/ai/ai-04.mp4", aspect: "3840 / 2160", description: "An AI-generated moving image study — exploring texture, motion, and atmosphere through a cinematic frame.", tools: "Runway Aleph", year: "2026" },
+  { id: 2, src: "/ai/ai-02.mp4", poster: "/ai/posters/ai-02.jpg", aspect: "1280 / 720", description: "An exercise in surreal mise-en-scène. Suspended blossoms frame a single figure, blending photographic realism with a painterly, dreamlike composition.", tools: "Nano Banana · Kling", year: "2026" },
+  { id: 1, src: "/ai/ai-11.mp4", aspect: "1920 / 1080", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "Midjourney · Kling", year: "2026" },
 ];
 
 export const FILMOGRAPHY = [
