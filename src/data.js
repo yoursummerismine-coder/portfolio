@@ -19,7 +19,39 @@ const STILLS_TB = [
   "/stills/tb-03.jpg",
 ];
 
+// The fourth supplied still is the user-selected lead image.
+const STILLS_ICARUS = [
+  "/stills/icarus-04.jpg",
+  "/stills/icarus-01.jpg",
+  "/stills/icarus-02.jpg",
+  "/stills/icarus-03.jpg",
+  "/stills/icarus-05.jpg",
+  "/stills/icarus-06.jpg",
+  "/stills/icarus-07.jpg",
+  "/stills/icarus-08.jpg",
+];
+
 export const FILMS = [
+  {
+    id: 4,
+    title: "Icarus",
+    titleKr: "이카로스",
+    category: "AI Short Film",
+    year: "2026",
+    role: "Director · AI Artist",
+    director: "Kyujin Choi",
+    format: "Generative AI",
+    duration: "3 min 02 sec",
+    durationLabel: "Runtime",
+    description:
+      "Reimagining the myth beyond hubris, Icarus follows a young man who chooses freedom over the safety of a life controlled by his father — climbing toward the sun even as his wings begin to fail.",
+    stills: STILLS_ICARUS,
+    stillAspect: "2940 / 1260",
+    stillWidth: "2200",
+    stillHeight: "943",
+    watchUrl: "https://youtu.be/uwBzUv7cuFs",
+    watchLabel: "Watch on YouTube",
+  },
   {
     id: 1,
     title: "Ear Candle",
@@ -95,16 +127,16 @@ export const AI_WORKS = [
 export const FILMOGRAPHY = [
   { id: 20, title: "아이우에오", titleEn: "A I W E O", year: "2026", role: "2nd AC", director: "—", format: "Music Video", watchUrl: "https://youtu.be/awlTdqgNRf0" },
   { id: 1, title: "이봉", titleEn: "Ear Candle", year: "2026", role: "Director of Photography", director: "Park Jinyeong", format: "Short Film" },
-  { id: 2, title: "쿠쿠 리네이처 메디킨하이", titleEn: "", year: "2026", role: "3rd AC", director: "—", format: "Commercial" },
+  { id: 2, title: "쿠쿠 리네이처 메디킨하이", titleEn: "", year: "2026", role: "3rd AC", director: "—", format: "Commercial", watchUrl: "https://youtu.be/hMEBRDtd_BQ" },
   { id: 3, title: "누가 내 십자가를 훔쳐갔는가?", titleEn: "", year: "2025", role: "3rd AC", director: "—", format: "Feature Film" },
-  { id: 4, title: "1993년", titleEn: "", year: "2025", role: "3rd AC", director: "—", format: "Music Video" },
+  { id: 4, title: "[MV] 유라 (youra) - 1993년", titleEn: "", year: "2025", role: "3rd AC", director: "—", format: "Music Video", watchUrl: "https://youtu.be/yku7P10DqRc" },
   { id: 19, title: "물고기도 숨을 쉰다", titleEn: "", year: "2024", role: "Assistant Director", director: "—", format: "Short Film" },
   { id: 5, title: "쓰레기통", titleEn: "Trash Can", year: "2024", role: "Director of Photography", director: "Kim Boae", format: "Short Film" },
   { id: 6, title: "스카이 스위트 한강브릿지 서울", titleEn: "", year: "2024", role: "3rd AC", director: "—", format: "Commercial" },
-  { id: 7, title: "힙지로 직장인 (EP.13, 16, 17, 18)", titleEn: "", year: "2024", role: "3rd Assistant Director", director: "—", format: "Web Drama" },
-  { id: 8, title: "KNOCKONMYDOOR — 천재 아니 바보", titleEn: "", year: "2024", role: "2nd AC", director: "—", format: "Music Video" },
+  { id: 7, title: "힙지로딕댱인2 | EP16. 속성소개팅 (ENG SUB) 'HIPJIRO WORKERS' EP16. Quick Blind Date", titleEn: "", year: "2024", role: "3rd Assistant Director", director: "—", format: "Web Drama", watchUrl: "https://youtu.be/bOL6O_E-crM" },
+  { id: 8, title: "KNOCKONMYDOOR '천재 아니 바보 (Genius no Fool)’ Official M/V", titleEn: "", year: "2024", role: "2nd AC", director: "—", format: "Music Video", watchUrl: "https://youtu.be/YbRmHyu3aBU" },
   { id: 9, title: "OVERBOOKING", titleEn: "", year: "2023", role: "Director of Photography", director: "—", format: "Short Film" },
-  { id: 10, title: "2023 무비히어로 캠페인", titleEn: "", year: "2023", role: "Assistant Director", director: "—", format: "Campaign" },
+  { id: 10, title: "[2023 무비히어로 캠페인 영상] 궐한자에게 권리란 없다. (With 궐사대장 박성웅)", titleEn: "", year: "2023", role: "Assistant Director", director: "—", format: "Campaign", watchUrl: "https://youtu.be/lBRC4-yV1KA" },
   { id: 11, title: "막세판", titleEn: "", year: "2023", role: "2nd AC", director: "—", format: "Short Film" },
   { id: 12, title: "얼씨구", titleEn: "", year: "2023", role: "3rd AC", director: "—", format: "Short Film" },
   { id: 13, title: "귤박스를 처리하는 방법", titleEn: "How to Dispose of Tangerine Box", year: "2023", role: "Gaffer", director: "Cha Hyunseo", format: "Short Film" },

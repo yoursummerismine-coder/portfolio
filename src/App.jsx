@@ -243,10 +243,17 @@ function FilmProject({ film, index }) {
         <button
           type="button"
           className="still-main"
+          style={film.stillAspect ? { aspectRatio: film.stillAspect } : undefined}
           onClick={() => setLightboxIndex(0)}
           aria-label={`Open first still from ${film.title}`}
         >
-          <img src={film.stills[0]} alt="" loading="lazy" width="1920" height="1080" />
+          <img
+            src={film.stills[0]}
+            alt=""
+            loading="lazy"
+            width={film.stillWidth || "1920"}
+            height={film.stillHeight || "1080"}
+          />
           <span className="still-open">View stills</span>
         </button>
 
@@ -264,7 +271,7 @@ function FilmProject({ film, index }) {
             )}
             {film.duration && (
               <div>
-                <dt>Status</dt>
+                <dt>{film.durationLabel || "Status"}</dt>
                 <dd>{film.duration}</dd>
               </div>
             )}
@@ -286,10 +293,17 @@ function FilmProject({ film, index }) {
           <button
             type="button"
             key={still}
+            style={film.stillAspect ? { aspectRatio: film.stillAspect } : undefined}
             onClick={() => setLightboxIndex(stillIndex + 1)}
             aria-label={`Open still ${stillIndex + 2} from ${film.title}`}
           >
-            <img src={still} alt="" loading="lazy" width="1920" height="1080" />
+            <img
+              src={still}
+              alt=""
+              loading="lazy"
+              width={film.stillWidth || "1920"}
+              height={film.stillHeight || "1080"}
+            />
           </button>
         ))}
       </div>
