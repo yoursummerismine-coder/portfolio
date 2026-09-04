@@ -459,7 +459,17 @@ function CrewPage() {
                 <p>{item.year}</p>
                 <div>
                   <h3>
-                    {item.title}
+                    {item.watchUrl ? (
+                      <a
+                        className="crew-title-link"
+                        href={item.watchUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${item.title} — Watch on YouTube`}
+                      >
+                        {item.title}
+                      </a>
+                    ) : item.title}
                     {item.titleEn && <span>{item.titleEn}</span>}
                   </h3>
                   <p>{item.format}{item.director !== "—" ? ` · Dir. ${item.director}` : ""}</p>

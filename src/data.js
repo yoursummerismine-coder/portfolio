@@ -93,6 +93,7 @@ export const AI_WORKS = [
 ];
 
 export const FILMOGRAPHY = [
+  { id: 20, title: "아이우에오", titleEn: "A I W E O", year: "2026", role: "2nd AC", director: "—", format: "Music Video", watchUrl: "https://youtu.be/awlTdqgNRf0" },
   { id: 1, title: "이봉", titleEn: "Ear Candle", year: "2026", role: "Director of Photography", director: "Park Jinyeong", format: "Short Film" },
   { id: 2, title: "쿠쿠 리네이처 메디킨하이", titleEn: "", year: "2026", role: "3rd AC", director: "—", format: "Commercial" },
   { id: 3, title: "누가 내 십자가를 훔쳐갔는가?", titleEn: "", year: "2025", role: "3rd AC", director: "—", format: "Feature Film" },

@@ -973,11 +973,29 @@ a {
   line-height: 1.5;
 }
 
-.crew-row h3 span {
+.crew-row h3 > span {
   margin-left: 12px;
   color: var(--text-muted);
   font-size: 11px;
   font-weight: 300;
+}
+
+.crew-title-link {
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.crew-title-link::after {
+  margin-left: 8px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 10px;
+  content: "↗";
+}
+
+.crew-title-link:hover,
+.crew-title-link:focus-visible {
+  color: var(--accent);
 }
 
 .crew-row div > p {
@@ -1278,7 +1296,7 @@ a {
     padding: 18px 0;
   }
 
-  .crew-row h3 span {
+  .crew-row h3 > span {
     display: block;
     margin: 3px 0 0;
   }
