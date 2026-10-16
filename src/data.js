@@ -31,6 +31,37 @@ const STILLS_ICARUS = [
   "/stills/icarus-08.jpg",
 ];
 
+export const COMMERCIALS = [
+  {
+    id: "new-balance-winter-escape",
+    title: "The Raw Iconic",
+    subtitle: "이스케이프 바람막이",
+    officialTitle: "뉴발란스 | The raw iconic 이스케이프 바람막이",
+    brand: "New Balance × WINTER",
+    year: "2026",
+    role: "AI Background Cleanup · AC",
+    image: "/commercials/new-balance-winter-escape.jpg",
+    imageAlt: "WINTER in a New Balance windbreaker against a purple studio background",
+    imageWidth: 2200,
+    imageHeight: 1228,
+    watchUrl: "https://youtu.be/jN1Aq4CmN1U",
+  },
+  {
+    id: "new-balance-winter-flying77",
+    title: "Flying77 Goose Down",
+    subtitle: "Boundless, from city to outdoors",
+    officialTitle: "뉴발란스 l Flying77 Goose down l boundless, from city to outdoors WINTER (Main)",
+    brand: "New Balance × WINTER",
+    year: "2026",
+    role: "AI Background Cleanup · AC",
+    image: "/commercials/new-balance-winter-flying77.jpg",
+    imageAlt: "WINTER in a gray New Balance down jacket with city buildings behind her",
+    imageWidth: 2200,
+    imageHeight: 1230,
+    watchUrl: "https://youtu.be/3y55lCNbdpY",
+  },
+];
+
 export const FILMS = [
   {
     id: 4,

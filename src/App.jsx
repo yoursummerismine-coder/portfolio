@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { AI_WORKS, FILMOGRAPHY, FILMS } from "./data";
+import { AI_WORKS, COMMERCIALS, FILMOGRAPHY, FILMS } from "./data";
 import "./styles.css";
 
 const NAV_ITEMS = [
+  { label: "Commercials", id: "commercials" },
   { label: "Films", id: "films" },
   { label: "AI Work", id: "ai-work" },
   { label: "About", id: "about" },
@@ -142,12 +143,12 @@ function Hero() {
   );
 }
 
-function SectionHeading({ number, title, description }) {
+function SectionHeading({ number, title, description, id }) {
   return (
     <header className="section-heading">
       <p className="section-number">{number}</p>
       <div>
-        <h2>{title}</h2>
+        <h2 id={id}>{title}</h2>
         {description && <p className="section-intro">{description}</p>}
       </div>
     </header>
@@ -321,10 +322,54 @@ function FilmProject({ film, index }) {
   );
 }
 
+function CommercialsSection() {
+  return (
+    <section className="section commercials-section" id="commercials" aria-labelledby="commercials-title">
+      <SectionHeading number="02" title="Commercials" id="commercials-title" />
+      <div className="commercial-grid">
+        {COMMERCIALS.map((work) => (
+          <article className="commercial-project" key={work.id} aria-labelledby={`${work.id}-title`}>
+            <a
+              className="commercial-media"
+              href={work.watchUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${work.officialTitle} — Watch on YouTube`}
+            >
+              <img
+                src={work.image}
+                alt={work.imageAlt}
+                width={work.imageWidth}
+                height={work.imageHeight}
+                loading="lazy"
+              />
+            </a>
+            <div className="commercial-copy">
+              <p className="commercial-meta"><span>{work.brand}</span><span>{work.year}</span></p>
+              <h3 id={`${work.id}-title`}>{work.title}</h3>
+              <p className="commercial-subtitle">{work.subtitle}</p>
+              <p className="commercial-role">{work.role}</p>
+              <a
+                className="text-link"
+                href={work.watchUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${work.title} — Watch on YouTube`}
+              >
+                Watch on YouTube <Arrow />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function FilmsSection() {
   return (
     <section className="section films-section" id="films" aria-labelledby="films-title">
-      <SectionHeading number="02" title="Selected Films" />
+      <SectionHeading number="03" title="Selected Films" />
       <div className="film-list">
         {FILMS.map((film, index) => (
           <FilmProject key={film.id} film={film} index={index} />
@@ -361,7 +406,7 @@ function AIWorkSection() {
   return (
     <section className="section ai-section" id="ai-work" aria-labelledby="ai-work-title">
       <SectionHeading
-        number="03"
+        number="04"
         title="AI Work"
         description="Visual experiments at the intersection of cinematography and generative tools — a continuing study in how machine-made imagery can carry emotional and compositional intent."
       />
@@ -395,7 +440,7 @@ function AboutSection() {
 
   return (
     <section className="section about-section" id="about" aria-labelledby="about-title">
-      <SectionHeading number="04" title="About" />
+      <SectionHeading number="05" title="About" />
       <div className="about-grid">
         <p className="about-statement">Light does not simply illuminate. It reveals.</p>
         <div className="about-copy">
@@ -430,7 +475,7 @@ function AboutSection() {
 function ContactSection() {
   return (
     <section className="section contact-section" id="contact" aria-labelledby="contact-title">
-      <SectionHeading number="05" title="Contact" />
+      <SectionHeading number="06" title="Contact" />
       <div className="contact-grid">
         <p className="contact-statement">Let’s create something worth watching.</p>
         <div className="contact-links">
@@ -550,6 +595,7 @@ export default function Portfolio() {
       <Header activeSection={activeSection} onNavigate={scrollTo} />
       <main id="main-content">
         <Hero />
+        <CommercialsSection />
         <FilmsSection />
         <AIWorkSection />
         <AboutSection />
