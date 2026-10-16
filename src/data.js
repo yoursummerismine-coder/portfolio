@@ -42,8 +42,8 @@ export const COMMERCIALS = [
     role: "AI Background Cleanup · AC",
     image: "/commercials/new-balance-winter-escape.jpg",
     imageAlt: "WINTER in a New Balance windbreaker against a purple studio background",
-    imageWidth: 2200,
-    imageHeight: 1228,
+    imageWidth: 1920,
+    imageHeight: 1080,
     watchUrl: "https://youtu.be/jN1Aq4CmN1U",
   },
   {
@@ -56,8 +56,8 @@ export const COMMERCIALS = [
     role: "AI Background Cleanup · AC",
     image: "/commercials/new-balance-winter-flying77.jpg",
     imageAlt: "WINTER in a gray New Balance down jacket with city buildings behind her",
-    imageWidth: 2200,
-    imageHeight: 1230,
+    imageWidth: 1920,
+    imageHeight: 1080,
     watchUrl: "https://youtu.be/3y55lCNbdpY",
   },
 ];
