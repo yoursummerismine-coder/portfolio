@@ -18,6 +18,9 @@ const commercialProjects = COMMERCIALS.map((work) => ({
   aspect: `${work.imageWidth} / ${work.imageHeight}`,
 }));
 
+// Intrinsic lead-still sizes, measured from the existing files (not a forced crop).
+const FILM_FRAMES = { 1: [1206, 651], 2: [3456, 1852], 3: [2466, 1760], 4: [2200, 943] };
+
 const filmProjects = FILMS.map((film) => ({
   ...film,
   key: `film-${film.id}`,
@@ -26,9 +29,9 @@ const filmProjects = FILMS.map((film) => ({
   subtitle: film.titleKr,
   thumbnail: film.stills[0],
   imageAlt: `A still from ${film.title}`,
-  imageWidth: Number(film.stillWidth || 1920),
-  imageHeight: Number(film.stillHeight || 1080),
-  aspect: film.stillAspect || "16 / 9",
+  imageWidth: FILM_FRAMES[film.id][0],
+  imageHeight: FILM_FRAMES[film.id][1],
+  aspect: `${FILM_FRAMES[film.id][0]} / ${FILM_FRAMES[film.id][1]}`,
 }));
 
 const aiProjects = AI_WORKS.map((work, index) => {

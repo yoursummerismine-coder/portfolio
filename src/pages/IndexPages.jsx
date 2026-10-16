@@ -9,7 +9,7 @@ export function HomePage() {
       <h1 className="sr-only" id="page-title">Kyujin Choi — Cinematographer · AI Artist</h1>
       <div className="home-stage">
         <p className="home-role">Cinematographer · AI Artist</p>
-        <figure className="home-image"><img src="/hero.jpg" alt="A cinematic close-up of an older woman in deep green-toned light" width="1208" height="678" fetchpriority="high" /></figure>
+        <figure className="home-image"><img src="/hero.jpg" alt="A cinematic close-up of an older woman in deep green-toned light" width="1206" height="651" fetchpriority="high" /></figure>
         <div className="home-caption"><p>Shaping light and shadow to find the emotional truth within each frame.</p><a className="text-link" href="#/archive">View archive <Arrow /></a></div>
       </div>
     </section>
