@@ -52,7 +52,7 @@ export default function Portfolio() {
       <Sidebar activePage={route.active} />
       <main id="main-content" ref={mainRef} tabIndex={-1} className={`site-main ${route.page === "home" ? "site-main--home" : ""}`}>
         <div className="route-view" key={hash}>{page}</div>
-        <footer className="content-footer"><p>© 2026 Kyujin</p><p>Every frame is a decision.</p></footer>
+        <footer className="content-footer"><p>© 2026 Kyujin</p>{route.page !== "home" && <p>Every frame is a decision.</p>}</footer>
       </main>
     </div>
   );

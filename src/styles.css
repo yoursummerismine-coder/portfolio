@@ -75,15 +75,17 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--text); outline-
 .project-card-subtitle { margin: 5px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .project-card-role { margin: 5px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
 
-.site-main--home .route-view { display: flex; }
-.home-page { display: flex; flex: 1; min-width: 0; }
-.home-stage { display: flex; flex-direction: column; justify-content: center; width: 100%; padding: 64px 0; }
-.home-role { text-align: right; color: var(--muted); font-size: 14px; line-height: 1.5; margin: 0 0 28px; }
-.home-image { margin: 0; }
-.home-image img { width: 100%; height: auto; }
-.home-caption { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 28px; padding-top: 22px; }
-.home-caption > p { margin: 0; max-width: 560px; font-size: 14px; line-height: 1.65; }
-.home-caption .text-link { margin-top: -10px; }
+.site-main--home { height: 100svh; min-height: 0; }
+.site-main--home .route-view { display: flex; min-height: 0; }
+.home-page { display: flex; flex: 1; min-width: 0; min-height: 0; }
+.home-stage { display: flex; flex-direction: column; width: 100%; min-height: 0; padding: 88px 0 48px; }
+.home-graphic { position: relative; flex: 1; min-height: 0; }
+.home-graphic svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.home-frame { color: var(--text); }
+.home-frame-cutout { fill: var(--background); }
+.home-frame-echo { color: #777a74; }
+.home-caption { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 28px; padding-top: 16px; }
+.home-role { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
 .site-main--home .content-footer { margin-top: 0; }
 
 .back-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-bottom: 14px; font-size: 13px; color: var(--muted); }
@@ -189,7 +191,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--text); outline-
   .site-main { margin: 0 var(--gutter); padding-top: 128px; min-height: 100svh; }
   .page-heading { margin-bottom: 28px; }
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .home-stage { padding: 48px 0; }
+  .home-stage { padding: 20px 0 12px; }
   .home-role { font-size: 13px; }
   .home-caption { gap: 24px; }
   .project-header { align-items: flex-start; }
@@ -211,10 +213,8 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--text); outline-
   .project-grid, .project-grid--large { grid-template-columns: minmax(0, 1fr); gap: 34px; }
   .project-title-row h2, .project-grid--large .project-title-row h2 { font-size: 17px; }
   .project-card-role { font-size: 12px; }
-  .home-role { margin-bottom: 20px; font-size: 12px; }
-  .home-caption { display: block; padding-top: 20px; }
-  .home-caption > p { font-size: 14px; max-width: 310px; }
-  .home-caption .text-link { margin-top: 18px; }
+  .home-role { font-size: 12px; }
+  .home-caption { grid-template-columns: minmax(0, 1fr); gap: 6px; padding-top: 20px; }
   .content-footer { flex-direction: column; gap: 7px; margin-top: 48px; padding-top: 24px; padding-bottom: 24px; font-size: 11px; }
   .project-header { display: block; margin-bottom: 22px; }
   .project-header h1 { font-size: 28px; }
