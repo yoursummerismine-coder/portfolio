@@ -1,6 +1,7 @@
 import { FILMOGRAPHY } from "../data";
 import { CATEGORIES, getProjects } from "../content";
 import ProjectGrid from "../components/ProjectGrid";
+import HomeGraphic from "../components/HomeGraphic";
 import { Arrow } from "../components/Icons";
 
 export function HomePage() {
@@ -8,16 +9,7 @@ export function HomePage() {
     <section className="home-page" aria-labelledby="page-title">
       <h1 className="sr-only" id="page-title">Kyujin Choi — Cinematographer · AI Artist</h1>
       <div className="home-stage">
-        <div className="home-graphic" aria-hidden="true">
-          <svg viewBox="0 0 1100 760" focusable="false">
-            <g className="home-frame-echo" fill="none" stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke">
-              <path d="M84 207 768 31 925 385 139 527Z" />
-              <path d="M247 317 913 145 1064 480 341 669Z" />
-            </g>
-            <path className="home-frame" fill="currentColor" d="M147 251 832 72 1005 439 205 653Z" />
-            <path className="home-frame-cutout" d="M217 283 794 138 924 408 261 594Z" />
-          </svg>
-        </div>
+        <HomeGraphic />
         <div className="home-caption"><p className="home-role">Cinematographer · AI Artist</p><a className="text-link" href="#/archive">View archive <Arrow /></a></div>
       </div>
     </section>
