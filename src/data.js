@@ -152,7 +152,7 @@ export const AI_WORKS = [
   { id: 5, title: "밤의 초상", src: "/ai/ai-05.mp4", aspect: "1920 / 1080", description: "A generative video study shaped through motion, texture, and cinematic atmosphere.", tools: "Runway Gen-4.5", year: "2026" },
   { id: 4, title: "바다 쪽으로", src: "/ai/ai-04.mp4", aspect: "3840 / 2160", description: "An AI-generated moving image study — exploring texture, motion, and atmosphere through a cinematic frame.", tools: "Runway Aleph", year: "2026" },
   { id: 2, title: "꽃 아래서", src: "/ai/ai-02.mp4", poster: "/ai/posters/ai-02.jpg", aspect: "1280 / 720", description: "An exercise in surreal mise-en-scène. Suspended blossoms frame a single figure, blending photographic realism with a painterly, dreamlike composition.", tools: "Nano Banana · Kling", year: "2026" },
-  { id: 1, title: "책 밖으로", src: "/ai/ai-11.mp4", aspect: "1920 / 1080", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "Midjourney · Kling", year: "2026" },
+  { id: 1, title: "Yes24 크레마클럽", src: "/ai/ai-11.mp4", aspect: "1920 / 1080", description: "A generative video study composed through cinematic motion and atmospheric texture.", tools: "Midjourney · Kling", year: "2026" },
 ];
 
 export const FILMOGRAPHY = [
