@@ -34,13 +34,12 @@ const filmProjects = FILMS.map((film) => ({
   aspect: `${FILM_FRAMES[film.id][0]} / ${FILM_FRAMES[film.id][1]}`,
 }));
 
-const aiProjects = AI_WORKS.map((work, index) => {
+const aiProjects = AI_WORKS.map((work) => {
   const [imageWidth, imageHeight] = (work.aspect || "16 / 9").split("/").map(Number);
   const poster = work.poster || work.src.replace("/ai/", "/ai/posters/").replace(/\.mp4$/, ".jpg");
   return {
     ...work,
     key: `ai-${work.id}`,
-    title: `AI Study ${String(index + 1).padStart(2, "0")}`,
     group: "ai-work",
     groupLabel: "AI Work",
     category: "AI Work",
@@ -48,7 +47,7 @@ const aiProjects = AI_WORKS.map((work, index) => {
     subtitle: work.tools || "Generative moving image",
     thumbnail: poster,
     poster,
-    imageAlt: `Poster for AI moving image study ${index + 1}`,
+    imageAlt: `Poster for ${work.title}`,
     imageWidth,
     imageHeight,
   };
